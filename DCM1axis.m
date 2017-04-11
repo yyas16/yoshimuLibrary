@@ -5,6 +5,7 @@ function DCM = DCM1axis(axis, phi)
 %   input: axis, rotation axis1 = x axis, 2 = y axis, 3 = z axis
 %          phi,  rotation angle, [rad], scalar
 %   outut: DCM, rotation matrix, 3x3 matrix
+%   DCM = DCM1axis(axis, phi)
 %   (c) 2015  yasuhiro yoshimura
 % ?-------------------------------------------------------------------
 

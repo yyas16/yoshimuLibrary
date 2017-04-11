@@ -7,9 +7,9 @@ function drawEarth(GMST)
 
 %% Options
 
-space_color = 'w';
+space_color = 'k';
 npanels = 180;   % Number of globe panels around the equator deg/panel = 360/npanels
-alpha   = 0.351; % globe transparency level, 1 = opaque, through 0 = invisible
+alpha   = 0.8; % globe transparency level, 1 = opaque, through 0 = invisible
 %GMST0 = []; % Don't set up rotatable globe (ECEF)
 GMST0 = 4.89496121282306; % Set up a rotatable globe at J2000.0
 
@@ -33,7 +33,9 @@ hold on;
 
 % Turn off the normal axes
 
-set(gca, 'NextPlot','replaceChildren', 'Visible','on');
+% set(gca, 'NextPlot','replaceChildren', 'Visible','on');
+
+set(gca, 'NextPlot','add', 'Visible','off');
 
 % axis equal;
 % axis auto;
@@ -66,7 +68,7 @@ cdata = imread(image_file);
 % a texturemap, which Matlab expects to be in cdata. Turn off the mesh edges.
 set(globe,'FaceColor', 'texturemap', 'CData', cdata, 'FaceAlpha', alpha, 'EdgeColor', 'none');
 drawnow
-F(ind) = getframe(gcf);
+% F(ind) = getframe(gcf);
 
 ind = ind + 1;
 end

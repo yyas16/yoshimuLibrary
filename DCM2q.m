@@ -7,45 +7,55 @@ function Q = DCM2q(scalar, R)
 %          R, rotation matrix from inertial frame to body-fixed frame,
 %                                                          3x3 matrix
 %   outut:  Q(q0 q1 q2 q3) q0 := cos(Phi/2)
+%   cf. 1	Markley, F. L., ÅgUnit Quaternion from Rotation Matrix,Åh
+%           Journal of Guidance Control, and Dynamics, vol. 31, Mar. 2008, 
+%           pp. 440?442.
 %  (c) 2015 yasuhiro yoshimura
+%     function Q = DCM2q(scalar, R)
 % -------------------------------------------------------------------
 
-temp = [0.5 * sqrt(1.0 + R(1,1) + R(2,2) + R(3,3)) % q0
-    0.5 * sqrt(1.0 + R(1,1) - R(2,2) - R(3,3))     % q1
-    0.5 * sqrt(1.0 - R(1,1) + R(2,2) - R(3,3))     % q2
-    0.5 * sqrt(1.0 - R(1,1) - R(2,2) + R(3,3))];   % q3
+trR =  R(1,1) + R(2,2) + R(3,3); % trace
+temp = [R(1,1)
+    R(2,2)
+    R(3,3)
+    trR];
 
-[q, iq] = max(temp);
+[val, iq] = max(temp);
 switch iq
     
     case 1
-        q0 = q;
-        q1 = 0.25 * (R(2,3) - R(3,2)) ./ q;
-        q2 = 0.25 * (R(3,1) - R(1,3)) ./ q;
-        q3 = 0.25 * (R(1,2) - R(2,1)) ./ q;
+        x1 = [1 + 2*R(1,1) - trR
+            R(1,2) + R(2,1)
+            R(1,3) + R(3,1)
+            R(2,3) - R(3,2)];
+        
+        q = x1 ./ norm(x1);
         
     case 2
-        q1 = q;
-        q2 = 0.25 * (R(1,2) + R(2,1)) ./ q;
-        q3 = 0.25 * (R(1,3) + R(3,1)) ./ q;
-        q0 = 0.25 * (R(2,3) - R(3,2)) ./ q;
+        x2 = [R(2,1) + R(1,2)
+            1 + 2 * R(2,2) - trR
+            R(2,3) + R(3,2)
+            R(3,1) - R(1,3)];
         
+        q = x2 ./ norm(x2);
     case 3
-        q2 = q;
-        q1 = 0.25 * (R(1,2) + R(2,1)) ./ q;
-        q3 = 0.25 * (R(3,2) + R(2,3)) ./ q;
-        q0 = 0.25 * (R(3,1) - R(1,3)) ./ q;
+        x3 = [R(3,1) + R(1,3)
+            R(3,2) + R(2,3)
+            1 + 2 * R(3,3) - trR
+            R(1,2) - R(2,1)];
         
+        q = x3 ./ norm(x3);
     case 4
-        q3 = q;
-        q1 = 0.25 * (R(3,1) + R(1,3)) ./ q;
-        q2 = 0.25 * (R(3,2) + R(2,3)) ./ q;
-        q0 = 0.25 * (R(1,2) - R(2,1)) ./ q;
+        x4 = [R(2,3) - R(3,2)
+            R(3,1) - R(1,3)
+            R(1,2) - R(2,1)
+            1 + trR];
         
+        q = x4 ./ norm(x4);
 end
 
-Q = (scalar == 0 ) .* [q0; q1; q2; q3]...
-    + (scalar == 4) .* [q1; q2; q3; q0];
 
+Q = (scalar == 0 ) .* [q(4); q(1); q(2); q(3)]...
+    + (scalar == 4) .* q;
 
 end

@@ -11,6 +11,7 @@ function output = qMult(scalar, def, q, p)
 %               Fundamentals of Spacecraft Attitude Determination and Control,
 %               New York, NY: Springer, 2014.
 %   Output: q * p
+%   qMult(scalar, def, q, p)
 %   (c) 2015 yasuhiro yoshimura
 %-------------------------------------------------------------------------------------
 

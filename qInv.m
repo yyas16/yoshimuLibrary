@@ -6,6 +6,7 @@ function q_inv = qInv(scalar, q)
 %           scalar == 4,  q4:= cos(theta/2), q = [q1, q2, q3, q4]
 %           q = quaternion to be inverted
 %   Output: q^\ast
+%    q_inv = qInv(scalar, q)
 %   (c) 2015 yasuhiro yoshimura
 %-------------------------------------------------------------------------------------
 
