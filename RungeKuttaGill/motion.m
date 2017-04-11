@@ -1,1 +1,0 @@
-%%	dynamics and continuous control%	const;    dx_ = [x_(2)  % d(sin) = cos    -x_(1)]; % d(cos) = -sin

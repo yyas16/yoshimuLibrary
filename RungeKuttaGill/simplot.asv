@@ -1,1 +1,0 @@
-%%	plot simulation data%	const;	graph = 1;	if graph == 1		figure(1)		clf        plot(ts,xs(1,:),'LineWidth',1);        xlabel('Time [s]')        ylabel('z')        grid        figure(2)		clf        plot(ts,u(2,:),'LineWidth',1);        xlabel('Time [s]')        ylabel('i')        grid    end

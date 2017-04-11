@@ -1,5 +1,0 @@
-%
-%   digital controller
-%
-const;
-

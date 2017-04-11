@@ -1,1 +1,0 @@
-%%	plot simulation data%	const;			figure(1)		clf        plot(ts,xs(:,1),'LineWidth',1);        xlabel('Time [s]')        ylabel('beta [rad]')        grid            figure(2)		clf        plot(ts,xs(:,2),'LineWidth',1);        xlabel('Time [s]')        ylabel('beta_dot [rad/s]')        grid            
