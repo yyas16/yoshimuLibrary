@@ -25,6 +25,7 @@ set(gca,'XGrid','on');
 set(gca,'YGrid','on');
 set(gca,'ZGrid','on');
 
-print -depsc2 -tiff fig1.eps
+% print -depsc2 -tiff fig1.eps
+saveas(gcf,'fig1','svg');
 
 end

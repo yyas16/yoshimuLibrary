@@ -2,15 +2,15 @@ function DCM =earthPrecession(jd)
 % ----------------------------------------------------------------------
 %  calculate the Earth precession
 %    20170310  y.yoshimura
-%    Inputs:
-%   Outputs:
+%    Inputs: jd: Julian days [day]
+%   Outputs: DCM 
 %   related function files:
 %   note:
 %   cf:1	Montenbruck, O., and Gill, E., 
 %           Satellite Orbits, Berlin, Heidelberg: 
 %           Springer Science & Business Media, 2012. p.176
 %   revisions;
-%
+%   DCM =earthPrecession(jd)
 %   (c) 2016 yasuhiro yoshimura
 %----------------------------------------------------------------------
 
