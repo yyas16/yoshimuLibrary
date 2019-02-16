@@ -6,6 +6,7 @@ function [year, month, day, hour, minute, second] = jd2gc(jd)
 %   Outputs: year,
 %            month,
 %            day,
+%            hour,
 %            minute,
 %            second,
 %   related function files:

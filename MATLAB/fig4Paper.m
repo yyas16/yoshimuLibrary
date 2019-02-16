@@ -20,10 +20,10 @@ clorder = ...
       64,  64,  64];% îZÇ¢äDêF  
 set(gca,'ColorOrder',clorder/255);
  
-% %% ç≈èâÇ©ÇÁgrid on & box on
-set(gca,'XGrid','on');
-set(gca,'YGrid','on');
-set(gca,'ZGrid','on');
+% %% ç≈èâÇ©ÇÁgrid off & box on
+set(gca,'XGrid','off');
+set(gca,'YGrid','off');
+set(gca,'ZGrid','off');
 
 % print -depsc2 -tiff fig1.eps
 saveas(gcf,'fig1','svg');

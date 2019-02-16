@@ -9,15 +9,16 @@ function [jd, oe] = TLE2Oe(fp, satName)
 %      P [s]    : Revolution Number at Epoch
 % 
 
-OE=zeros(6,1);
+OE = zeros(6,1);
 
 mu=2975536351779840.0;   %GE, in km^3/day^2. ----- */
 mu=2.9759063040e+15;   %GE, in km^3/day^2. by yoshimura----- */
 
 
 % scan file until satname found
-while ~feof(fp)
-    line=fgetl(fp);
+fileID = fopen(fp);
+while ~feof(fileID)
+    line = fgetl(fileID);
     found = strcmp(line, satName);
     if found
         break
@@ -25,9 +26,9 @@ while ~feof(fp)
 end
 
 % read two lines
-line1 = fgetl(fp);
-line2 = fgetl(fp); 
-fclose(fp);
+line1 = fgetl(fileID);
+line2 = fgetl(fileID); 
+fclose(fileID);
 
 % Information from LINE1
 satid        = line1(3:7);

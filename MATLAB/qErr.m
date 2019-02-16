@@ -5,9 +5,9 @@ function qe = qErr(scalar, q, qd)
 %    Input: scalar, specifies the definition of the quaternion
 %           scalar == 0,  q0:= cos(theta/2), q = [q0, q1, q2, q3]
 %           scalar == 4,  q4:= cos(theta/2), q = [q1, q2, q3, q4]
-%           q, current (or true ) quaternion, 4x1 vector
-%           qd, desired (or estimated ) quaternion
-%   Output: qd^(-1) \odot  q
+%           q, current (or true ) quaternion, Nx4 matrix
+%           qd, desired (or estimated ) quaternion, Nx4 matrix
+%   Output: qd^(-1) \odot  q Nx4 matrix
 %   qErr(scalar, q, qd)
 %   (c) 2015 yasuhiro yoshimura
 %-------------------------------------------------------------------------------------
@@ -18,15 +18,15 @@ function qe = qErr(scalar, q, qd)
 
 % q0がスカラーの定義かつ \odot のクォータニオン積の定義で計算する
     qtemp = (scalar == 0) .* q ...
-        + (scalar == 4) .* [q(4); q(1); q(2); q(3)];
+        + (scalar == 4) .* [q(:,4), q(:,1), q(:,2), q(:,3)];
     qtemp_d = (scalar == 0) .* qd ...
-        + (scalar == 4) .* [qd(4); qd(1); qd(2); qd(3)];
+        + (scalar == 4) .* [qd(:,4), qd(:,1), qd(:,2), qd(:,3)];
     
     q_inv_d = qInv(0, qtemp_d);  
     
-    temp  = qMult(0, 0, q_inv_d, qtemp);
+    temp = qMult(0, 0, q_inv_d, qtemp);
    
     qe = (scalar == 0) .* temp ...
-        + (scalar == 4) .* [temp(2); temp(3); temp(4); temp(1)];
+        + (scalar == 4) .* [temp(:,2), temp(:,3), temp(:,4), temp(:,1)];
     
 end
