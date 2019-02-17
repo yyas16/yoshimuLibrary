@@ -9,7 +9,7 @@ function [r, v] = oe2rv(oe)
 %                    argp        - argument of perigee/longitude of periapsis,  rad
 %                    nu          - true anomaly/true longitude/true latitude  rad
 %   Output: r: position vector, 3x1 vector, km
-%           v: velocity vector, 3x1 vector, km
+%           v: velocity vector, 3x1 vector, km/s
 % cf. Vallado, D. A., and McClain, W. D., 
 % Fundamentals of Astrodynamics and Applications, 
 %  note: if true anomaly is unknown, use calcTA.m function to obtain true
@@ -17,8 +17,10 @@ function [r, v] = oe2rv(oe)
 %  [r v] = oe2rv(oe);
 %   (c) 2015 yasuhiro yoshimura
 %----------------------------------------------------------------------
+orbit_const
+
 small = 1.0e-10;
-mu = 3.986e+5; % 地心重力定数 [km^3/s^2]
+mu = GE / (24*60*60) /(24*60*60); % 地心重力定数 [km^3/s^2]
 
 a       = oe(1);
 ecc     = oe(2);
@@ -26,7 +28,6 @@ incl    = oe(3);
 omega   = oe(4);
 argp    = oe(5);
 nu      = oe(6);
-
 
 if ( ecc < small )
     % ----------------  circular equatorial  ------------------
