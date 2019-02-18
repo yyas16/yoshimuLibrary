@@ -3,7 +3,7 @@ function DCM = earthFullRot(jd, UT1_UTC)
 %  calculate Earth rotation including precession and nutation
 %    20170516  y.yoshimura
 %    Inputs: jd: Julian days [day]
-%   Outputs: DCM 
+%   Outputs: DCM from ECI to ECEF
 %   related function files:
 %   note:
 %   cf:1	
