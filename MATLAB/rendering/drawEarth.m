@@ -33,9 +33,9 @@ hold on;
 
 % Turn off the normal axes
 
-% set(gca, 'NextPlot','replaceChildren', 'Visible','on');
+set(gca, 'NextPlot','replaceChildren', 'Visible','off');
 
-set(gca, 'NextPlot','add', 'Visible','off');
+% set(gca, 'NextPlot','add', 'Visible','off');
 
 % axis equal;
 % axis auto;

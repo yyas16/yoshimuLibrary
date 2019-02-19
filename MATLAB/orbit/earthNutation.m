@@ -1,4 +1,4 @@
-function [dcm,  eps_a, deps, dpsi]= earthNutationo(jd)
+function [dcm,  eps_a, deps, dpsi]= earthNutation(jd)
 % ----------------------------------------------------------------------
 %   calculate the Earth nutation
 %    20170310  y.yoshimura

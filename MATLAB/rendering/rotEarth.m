@@ -14,8 +14,8 @@ axis([-1e+12 1e+12 -1e+12 1e+12 -1e+12 1e+12]);
 axis  equal
 for i = 0:0.1:2*pi
     drawEarth(i);
-    hold on
-%     drawSun(0);
+%     hold on
+%     drawSun(i);
 end
 
 % fig = figure;

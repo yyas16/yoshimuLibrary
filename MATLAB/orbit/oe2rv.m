@@ -20,7 +20,7 @@ function [r, v] = oe2rv(oe)
 orbit_const
 
 small = 1.0e-10;
-mu = GE / (24*60*60) /(24*60*60); % 地心重力定数 [km^3/s^2]
+mu = GE; % 地心重力定数 [km^3/s^2]
 
 a       = oe(1);
 ecc     = oe(2);
