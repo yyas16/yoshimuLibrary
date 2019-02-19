@@ -15,7 +15,7 @@ function rb = qRotation(scalar, r, qIn)
 %                 q4 * p4 - qv' * pv]
 
 % quaternion multipliationで計算するので便宜上，nx4 vectorにする
-r_temp = [zeros(length(r),1) r];
+r_temp = [zeros(size(r,1),1) r];
 
 % q0がスカラーの定義かつ \odot のクォータニオン積の定義で計算する
     q = (scalar == 0) .* qIn ...
