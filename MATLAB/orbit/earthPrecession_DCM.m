@@ -1,4 +1,4 @@
-function DCM =earthPrecession(jd)
+function DCM =earthPrecession_DCM(jd)
 % ----------------------------------------------------------------------
 %  calculate the Earth precession
 %    20170310  y.yoshimura

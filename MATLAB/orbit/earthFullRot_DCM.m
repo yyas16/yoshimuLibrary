@@ -13,10 +13,10 @@ function DCM = earthFullRot_DCM(jd, UT1_UTC)
 %----------------------------------------------------------------------
 
 % nutation
-[dcm_n,  eps_a, deps, dpsi] = earthNutationo(jd);
+[dcm_n,  eps_a, deps, dpsi] = earthNutation_DCM(jd);
 
 % precession 
-dcm_p = earthPrecession(jd);
+dcm_p = earthPrecession_DCM(jd);
 
 % calculate GMST
 gmst = jd2GMST(jd, UT1_UTC);
