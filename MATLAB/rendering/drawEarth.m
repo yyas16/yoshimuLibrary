@@ -7,9 +7,9 @@ function drawEarth(GMST)
 
 %% Options
 
-space_color = 'k';
+space_color = 'w';
 npanels = 180;   % Number of globe panels around the equator deg/panel = 360/npanels
-alpha   = 0.8; % globe transparency level, 1 = opaque, through 0 = invisible
+alpha   = 0.28; % globe transparency level, 1 = opaque, through 0 = invisible
 %GMST0 = []; % Don't set up rotatable globe (ECEF)
 GMST0 = 4.89496121282306; % Set up a rotatable globe at J2000.0
 
@@ -21,10 +21,10 @@ image_file = 'earth.jpg';
 
 % Mean spherical earth
 
-erad    = 6371008.7714; % equatorial radius (meters)
-prad    = 6371008.7714; % polar radius (meters)
+erad    = 6371008.7714*1e-3; % equatorial radius, km
+prad    = 6371008.7714*1e-3; % polar radius, km
 erot    = 7.2921158553e-5; % earth rotation rate (radians/sec)
-global F ind
+% global F ind
 %% Create figure
 % figure(999);
 fig = gcf;
@@ -33,7 +33,7 @@ hold on;
 
 % Turn off the normal axes
 
-set(gca, 'NextPlot','replaceChildren', 'Visible','off');
+% set(gca, 'NextPlot','replaceChildren', 'Visible','off');
 
 % set(gca, 'NextPlot','add', 'Visible','off');
 
@@ -70,5 +70,5 @@ set(globe,'FaceColor', 'texturemap', 'CData', cdata, 'FaceAlpha', alpha, 'EdgeCo
 drawnow
 % F(ind) = getframe(gcf);
 
-ind = ind + 1;
+% ind = ind + 1;
 end

@@ -1,5 +1,5 @@
 % ----------------------------------------------------------------------
-%   Unscented Kalman Filter test
+%   example: Unscented Kalman Filter
 %   algorithmを1.書き下し， 2.functionレベルで書き下し， 3.まるっとfunction化で確認．
 %    20181210  y.yoshimura
 %    Inputs:

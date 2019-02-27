@@ -1,4 +1,4 @@
-function [l, b, r] = sun(jd)
+function [l, b, r] = sun(jd, earthVSOP)
 % ----------------------------------------------------------------------
 %   Calculates Sun's geocentric longitude, latitude, and
 %   distance for a given Julian date. referred to the mean
@@ -20,7 +20,7 @@ function [l, b, r] = sun(jd)
 %   (c) 2019 yasuhiro yoshimura
 %----------------------------------------------------------------------
 
-[l, b, r] = earthVSOP87(jd);
+[l, b, r] = earthVSOP87(jd, earthVSOP);
 
 l = l + pi;
 b = -1 .* b;

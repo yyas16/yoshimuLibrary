@@ -1,4 +1,4 @@
-function [lon, lat, r] = earthVSOP87(jd)
+function [lon, lat, r] = earthVSOP87(jd, earthVSOP)
 % ----------------------------------------------------------------------
 %    Calculate Earth heliocentric longitude, latitude, and distance
 %    20190214  y.yoshimura
@@ -17,7 +17,8 @@ function [lon, lat, r] = earthVSOP87(jd)
 %
 %   (c) 2019 yasuhiro yoshimura
 %----------------------------------------------------------------------
-VSOP_const  % load variable: earthVSOP
+% VSOP_const  % load variable: earthVSOP
+
 
 if iscolumn(jd)
     jd = jd';

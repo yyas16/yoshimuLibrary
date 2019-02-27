@@ -15,16 +15,49 @@
 function face = calcNormal(vert, face)
 
 for j = 1:size(vert,2)
-    for i = 1:size(face{j}.make,1)
+    for i = 1:size(face(j).make,1)
+        
+%         %	/* v1 = p1 - p2 */
+%         
+%         v1 = vert{j}.coord(face{j}.make(i,1),:)'...
+%             - vert{j}.coord(face{j}.make(i,2),:)';
+%         
+%         % 	/* v2 = p3 - p2 */
+%         v2 = vert{j}.coord(face{j}.make(i,3),:)'...
+%             - vert{j}.coord(face{j}.make(i,2),:)';
+%         
+%         
+%         % 	/* 外積v2×v1（= cross）を求める */
+%         crossV = cross(v2, v1);
+%         
+%         % 	/* 外積v2×v1の長さ|v2×v1|（= length）を求める */
+%         crossV_norm = norm(crossV);
+%         
+%         % 	/* 長さ|v2×v1|が0のときは法線ベクトルは求められない */
+%         if (crossV_norm == 0.0)
+%             %             fprintf('error at normal vector calculation \n');
+%             crossV = [0; 0 ; 1e-8];
+%             crossV_norm = 1e-8;
+%         end
+%         
+%         % 	/* 外積v2×v1を長さ|v2×v1|で割って法線ベクトルnを求める *
+%         n = crossV ./ crossV_norm;
+% %         n = n'; % norma vector n becomes 1x3 vector
+%         
+%         face{j}.normal(:,i) = n;
+%         
+%         
+
+
         
         %	/* v1 = p1 - p2 */
         
-        v1 = vert{j}.coord(face{j}.make(i,1),:)'...
-            - vert{j}.coord(face{j}.make(i,2),:)';
+        v1 = vert(j).coord(face(j).make(i,1),:)'...
+            - vert(j).coord(face(j).make(i,2),:)';
         
         % 	/* v2 = p3 - p2 */
-        v2 = vert{j}.coord(face{j}.make(i,3),:)'...
-            - vert{j}.coord(face{j}.make(i,2),:)';
+        v2 = vert(j).coord(face(j).make(i,3),:)'...
+            - vert(j).coord(face(j).make(i,2),:)';
         
         
         % 	/* 外積v2×v1（= cross）を求める */
@@ -44,8 +77,7 @@ for j = 1:size(vert,2)
         n = crossV ./ crossV_norm;
 %         n = n'; % norma vector n becomes 1x3 vector
         
-        face{j}.normal(:,i) = n;
-        
+        face(j).normal(:,i) = n;
     end
 end
 end
