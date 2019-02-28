@@ -16,7 +16,7 @@ function Pcov = ukf_cov(x_est, X0, X)
 global w0c wim
 
 n = length(x_est);
-P0 = w0c .* (X0 - x_est) * (X0 - x_est)';
+P0 = w0c .* ((X0 - x_est) * (X0 - x_est)');
 Pmat = X - kron(x_est, ones(1,2*n));
 
 Pcov = P0 + wim .* Pmat * Pmat';

@@ -21,11 +21,16 @@ global w0c wim
 
 n = length(x_est);
 
+y_est = y_est(:);
+
+% covariance
 Pyy0 = w0c * (Y0 - y_est) * (Y0 - y_est)';
-Pyymat = Y - y_est;
+Pyymat = bsxfun(@minus, Y, y_est); % (each sigma point of Y) - y_est
 Pyy = Pyy0 + wim .* Pyymat * Pyymat';
+
+% cross correlation
 Pxy0 = w0c * (X0 - x_est) * (Y0 - y_est)';
-Pmat = X - kron(x_est, ones(1,2*n));
+Pmat = bsxfun(@minus, X, x_est);
 Pxy = Pxy0 + wim .* Pmat * Pyymat';
 
 end

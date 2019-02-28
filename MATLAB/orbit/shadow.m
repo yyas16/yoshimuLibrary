@@ -4,6 +4,8 @@ function nu = shadow(sat_i, sun_i, RE, RS)
 %    20190220  y.yoshimura
 %    Inputs: sat_i, satellite position@inertial frame, nx3
 %            sun_i, sun position@inertial frame, nx3
+%            RE, radius of Earth
+%            RS, radius of Sun
 %   Outputs: nu, shadow coefficient, nx1 vector
 %            nu == 1 sunlit
 %            nu == 0 eclipse

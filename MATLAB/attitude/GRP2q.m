@@ -25,6 +25,6 @@ q4 = q4_num ./ q4_den;
 qv = (a + q4) .* p ./ f;
 
 q = (scalar == 0) .* [q4 qv]...
-    + (scalar == 0) .* [qv q4];
+    + (scalar == 4) .* [qv q4];
 
 end
