@@ -7,7 +7,7 @@ function drawSun(rotAngle)
 
 space_color = 'w';
 npanels = 180;   % Number of globe panels around the equator deg/panel = 360/npanels
-alpha   = 0.30; % globe transparency level, 1 = opaque, through 0 = invisible
+alpha   = 0.8; % globe transparency level, 1 = opaque, through 0 = invisible
 
 % texture image
 % Anything imread() will handle, but needs to be a 2:1 unprojected globe
@@ -29,9 +29,9 @@ hold on;
 
 % Turn off the normal axes
 
-set(gca, 'NextPlot','add', 'Visible','on');
+set(gca, 'NextPlot','add', 'Visible','off');
 
-% axis equal;
+axis equal;
 % axis auto;
 % axis([-1e+8,1e+8,-1e+8,1e+8])
 

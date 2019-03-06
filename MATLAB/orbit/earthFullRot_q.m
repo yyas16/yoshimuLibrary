@@ -13,6 +13,7 @@ function q = earthFullRot_q(jd, UT1_UTC, scalar)
 %   note:
 %   cf:1	
 %   revisions;
+%   function q = earthFullRot_q(jd, UT1_UTC, scalar)
 %   (c) 2017 yasuhiro yoshimura
 %----------------------------------------------------------------------
 

@@ -20,7 +20,6 @@ function nu = shadow(sat_i, sun_i, RE, RS)
 %----------------------------------------------------------------------
 
 % orbit_const
-
 sun_rel = sun_i - sat_i;
 a = asin(RS ./ vecnorm(sun_rel,2,2));
 b = asin(RE ./ vecnorm(sat_i, 2, 2));

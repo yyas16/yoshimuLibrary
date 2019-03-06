@@ -1,0 +1,1 @@
+mex -v sfunc_igrf12.c igrfsyn12.c sfunc_igrf12_wrapper.c

@@ -10,7 +10,7 @@ function [lon, lat, r] = pos2lonLat(pos)
 %   note:
 %   cf:
 %   revisions;
-%
+%   function [lon, lat, r] = pos2lonLat(pos)
 %   (c) 2019 yasuhiro yoshimura
 %----------------------------------------------------------------------
 
