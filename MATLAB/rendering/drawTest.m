@@ -11,6 +11,9 @@
 %   (c) 2018 yasuhiro yoshimura
 %----------------------------------------------------------------------
 
+clc
+clear
+close all
 
 ca = ones(1,6);
 length = [1;2;3];
@@ -26,7 +29,7 @@ for k = 1:kN
     figure(4460)
     
     cb     = colorbar;
-    h(m,k) = patch('Vertices', vert{k}.coord, 'Faces', face{k}.make);
+    h(m,k) = patch('Vertices', vert(k).coord, 'Faces', face(k).make);
     
     set(h(m,k), 'FaceColor', 'b');
     set(h(m,k),'FaceLighting','phong','EdgeLighting','phong');

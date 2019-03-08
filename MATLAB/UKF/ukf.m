@@ -1,4 +1,4 @@
-function [P_est, x_est] = ukf(f, h, B, Q, R, lam, P, x, y)
+function [P_est, x_est] = ukf(f, h, B, Q, R, lam, P, x, y, w0m, w0c, wim)
 % ----------------------------------------------------------------------
 %   Unscented Kalman Filter
 %    20181210  y.yoshimura
@@ -21,7 +21,6 @@ function [P_est, x_est] = ukf(f, h, B, Q, R, lam, P, x, y)
 %
 %   (c) 2018 yasuhiro yoshimura
 %----------------------------------------------------------------------
-global w0m wim
 % sigma points
 [X0, X] = ukf_sigma(lam, P, x);
 
@@ -33,7 +32,7 @@ X = f(X);
 x_est = w0m .* X0' + wim .* sum(X,2)';
 
 % covariance
-P = ukf_cov(x_est', X0, X);
+P = ukf_cov(x_est', X0, X, w0c, wim);
 
 % output sigma points
 Y = h(X);
@@ -43,7 +42,7 @@ Y0 = h(X0);
 y_est = w0m .* Y0' + wim .* sum(Y,2)';
 
 % Calculate correlation
-[Pyy, Pxy] = ukf_corr(x_est', X0, X, y_est, Y0, Y);
+[Pyy, Pxy] = ukf_corr(x_est', X0, X, y_est, Y0, Y, w0c, wim);
 
 % Innovations Covarinace
 Pvv = Pyy + R;

@@ -23,7 +23,7 @@ m_facet = zeros(length(jd), size(face(1).make,1));
 L = zeros(length(jd), size(face(1).make,1));
 
 %% Sun position
-[l b dis] = sun(jd, earthVSOP);
+[l, b, dis] = sun(jd, earthVSOP);
 sun_pos = lonLat2pos(l, b, AU2km(dis));
 sun_relDir = sun_pos - pos; % km, relative sun direction@ECI
 

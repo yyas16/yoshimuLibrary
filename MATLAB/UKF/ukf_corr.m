@@ -1,4 +1,4 @@
-function [Pyy, Pxy] = ukf_corr(x_est, X0, X, y_est, Y0, Y)
+function [Pyy, Pxy] = ukf_corr(x_est, X0, X, y_est, Y0, Y, w0c, wim)
 % ----------------------------------------------------------------------
 %   calculate the correlated covariances
 %    20181210  y.yoshimura
@@ -8,16 +8,17 @@ function [Pyy, Pxy] = ukf_corr(x_est, X0, X, y_est, Y0, Y)
 %            y_est, a priori estimated measurement vector: mx1  vector
 %            Y0, measurement simga points: mx1 vector
 %            Y, measurement simga points: mx2*n vector
+%            w0c,
+%            wim
 %   Outputs: Pyy, measurement covarince: mxm matrix
 %            Pxy, correlated covariance: nxm matrix
 %   related function files:
 %   note: x_est and y_est must be column vector
 %   cf:
 %   revisions;
-%
+%   function [Pyy, Pxy] = ukf_corr(x_est, X0, X, y_est, Y0, Y, w0c, wim)
 %   (c) 2018 yasuhiro yoshimura
 %----------------------------------------------------------------------
-global w0c wim
 
 n = length(x_est);
 

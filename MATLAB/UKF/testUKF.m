@@ -17,7 +17,7 @@ clc
 clear
 close all
 
-global a w0c wim w0m
+global a
 
 % Initialize
 dt = 1;
@@ -146,7 +146,7 @@ for i = 1:m-1
     x_est(i+1,:) = w0m .* x0' + wim .* sum(xx,2)'; % a priroi estimation
     
     % covariance
-    Pcov = ukf_cov(x_est(i+1,:)', x0, xx);
+    Pcov = ukf_cov(x_est(i+1,:)', x0, xx, w0c, wim);
     
     % output sigma points
     for j = 1:2*n
@@ -158,7 +158,7 @@ for i = 1:m-1
     ye = w0m * ye0 + wim * sum(yez,2);
     
     % Calculate correlation
-    [Pyy, Pxy] = ukf_corr(x_est(i+1,:)', x0, xx, ye, ye0, yez);
+    [Pyy, Pxy] = ukf_corr(x_est(i+1,:)', x0, xx, ye, ye0, yez, w0c, wim);
     
     % Innovations Covarinace
     pvv = Pyy + r;
@@ -199,7 +199,7 @@ R = r;
 P_est = zeros(3, 3, m);
 P_est(:,:,1) = Pcov;
 for i = 1:m-1
-    [P_est(:,:,i+1), x_est(i+1,:)] = ukf(f, h, B, Q, R, lam, P_est(:,:,i), x_est(i,:)', ym(i+1));
+    [P_est(:,:,i+1), x_est(i+1,:)] = ukf(f, h, B, Q, R, lam, P_est(:,:,i), x_est(i,:)', ym(i+1), w0m, w0c, wim);
 end
 
 x_err = x - x_est;

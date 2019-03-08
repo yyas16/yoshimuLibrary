@@ -1,3 +1,4 @@
+function vert = v4cube(length, split)
 % ----------------------------------------------------------------------
 %   generate vertices of cube
 %    20180809  y.yoshimura
@@ -12,8 +13,7 @@
 %   (c) 2018 yasuhiro yoshimura
 %----------------------------------------------------------------------
 %// ñ ç¿ïWê∂ê¨ íºï˚ëÃ
-function vert = v4cube(length, split)
-vert = cell(1,6);
+
 for k=1:6
     switch (k)
         case 1%: // X+ñ 
@@ -22,9 +22,9 @@ for k=1:6
                     
                     num = j + (i - 1) * (split(2) + 1);
                    
-                    vert{k}.coord(num,1) = length(1) / 2.0;
-                    vert{k}.coord(num,2) = length(2) / 2.0 - (j - 1) * length(2) / split(2);
-                    vert{k}.coord(num,3) = length(3) / 2.0 - (i - 1) * length(3) / split(3);
+                    vert(k).coord(num,1) = length(1) / 2.0;
+                    vert(k).coord(num,2) = length(2) / 2.0 - (j - 1) * length(2) / split(2);
+                    vert(k).coord(num,3) = length(3) / 2.0 - (i - 1) * length(3) / split(3);
                 end
             end
             
@@ -34,9 +34,9 @@ for k=1:6
                     
                     num = j + (i - 1) * (split(2) + 1);
                     
-                    vert{k}.coord(num,1) = -1.0 * length(1) / 2.0;
-                    vert{k}.coord(num,2) = length(2) / 2.0 - (j - 1) * length(2) / split(2);
-                    vert{k}.coord(num,3) = length(3) / 2.0 - (i - 1) * length(3) / split(3);
+                    vert(k).coord(num,1) = -1.0 * length(1) / 2.0;
+                    vert(k).coord(num,2) = length(2) / 2.0 - (j - 1) * length(2) / split(2);
+                    vert(k).coord(num,3) = length(3) / 2.0 - (i - 1) * length(3) / split(3);
                     
                 end
             end
@@ -46,9 +46,9 @@ for k=1:6
                 for j=1:split(3)+1
                     
                     num = j + (i - 1) * (split(3) + 1);
-                    vert{k}.coord(num,1) = length(1) / 2.0 - (i - 1) * length(1) / split(1);
-                    vert{k}.coord(num,2) = length(2) / 2.0;
-                    vert{k}.coord(num,3)=  length(3) / 2.0 - (j - 1) * length(3) / split(3);
+                    vert(k).coord(num,1) = length(1) / 2.0 - (i - 1) * length(1) / split(1);
+                    vert(k).coord(num,2) = length(2) / 2.0;
+                    vert(k).coord(num,3)=  length(3) / 2.0 - (j - 1) * length(3) / split(3);
                     
                 end
             end
@@ -57,9 +57,9 @@ for k=1:6
                 for j=1:split(3)+1
                     
                     num = j + (i - 1) * (split(3) + 1);
-                    vert{k}.coord(num,1) = length(1) / 2.0 - (i - 1) * length(1) / split(1);
-                    vert{k}.coord(num,2) = -1.0 * length(2) / 2.0;
-                    vert{k}.coord(num,3)=  length(3) / 2.0 - (j - 1) * length(3) / split(3);
+                    vert(k).coord(num,1) = length(1) / 2.0 - (i - 1) * length(1) / split(1);
+                    vert(k).coord(num,2) = -1.0 * length(2) / 2.0;
+                    vert(k).coord(num,3)=  length(3) / 2.0 - (j - 1) * length(3) / split(3);
                 end
             end
             
@@ -69,9 +69,9 @@ for k=1:6
                 for j=1:split(1)+1
                     
                     num = j + (i - 1) * (split(1) + 1);
-                    vert{k}.coord(num,1) = length(1) / 2.0 - (j - 1) * length(1) / split(1);
-                    vert{k}.coord(num,2) = length(2) / 2.0 - (i - 1) * length(2) / split(2);
-                    vert{k}.coord(num,3)=  length(3) / 2.0;
+                    vert(k).coord(num,1) = length(1) / 2.0 - (j - 1) * length(1) / split(1);
+                    vert(k).coord(num,2) = length(2) / 2.0 - (i - 1) * length(2) / split(2);
+                    vert(k).coord(num,3)=  length(3) / 2.0;
                 end
             end
             
@@ -80,9 +80,9 @@ for k=1:6
                 for j=1:split(1)+1
                     
                     num = j + (i - 1) * (split(1) + 1);
-                    vert{k}.coord(num,1) = length(1) / 2.0 - (j - 1) * length(1) / split(1);
-                    vert{k}.coord(num,2) = length(2) / 2.0 - (i - 1) * length(2) / split(2);
-                    vert{k}.coord(num,3)=  -1.0 * length(3) / 2.0;
+                    vert(k).coord(num,1) = length(1) / 2.0 - (j - 1) * length(1) / split(1);
+                    vert(k).coord(num,2) = length(2) / 2.0 - (i - 1) * length(2) / split(2);
+                    vert(k).coord(num,3)=  -1.0 * length(3) / 2.0;
                 end
             end
     end
