@@ -1,4 +1,4 @@
-function [m, m_facet] = LC(jd, q, pos, obs_ECI, face, nu, earthVSOP)
+function [m, m_facet, face] = LC(jd, q, pos, obs_ECI, face, nu, earthVSOP)
 % ----------------------------------------------------------------------
 %   calculate Light Curves for the object related to face
 %    20190219  y.yoshimura
@@ -37,7 +37,9 @@ for i = 1:length(jd)
     sun_tmp = q2DCM(4, q(i,:))*normRow(sun_relDir(i,:))';
     obs_tmp = q2DCM(4, q(i,:))*normRow(obs_relDir(i,:))';
     [L(i,1), face] = LPS(face, sun_tmp, obs_tmp);
-    m_facet(i,:) = face(1).m; % for each facet
+    for j = 1:length(face)
+        m_facet(i,:,j) = face(j).m; % for each facet
+    end
 end
 L = L .* nu; % consider umbra, penumbra
 L = L .* (dot(sunObs_rel, normRow(obs_ECI),2) <= 0.0); % when observer cannot see Sun
