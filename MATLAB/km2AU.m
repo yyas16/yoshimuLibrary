@@ -1,6 +1,6 @@
-function km = AU2km(AU)
+function AU = km2AU(km)
 % ----------------------------------------------------------------------
-%    transform AU to km
+%    transform km to AU
 %    20190214  y.yoshimura
 %    Inputs:
 %   Outputs:
@@ -12,6 +12,6 @@ function km = AU2km(AU)
 %   (c) 2019 yasuhiro yoshimura
 %----------------------------------------------------------------------
 
-km = AU .* 149597870.0;
+AU = km ./ 149597870.0;
 
 end

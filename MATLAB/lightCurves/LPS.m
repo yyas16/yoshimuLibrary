@@ -29,8 +29,7 @@ for i = 1:size(face,2) % each face
             c_total = face(i).Cd(j)...
                 + 1.0 * face(i).Cs(j) * (u_bisec'*face(i).normal(:,j) >= cos(deg2rad(5)));
             
-            tmp = c_total * face(i).area(j) * (face(i).normal(:,j)'*sun) *(face(i).normal(:,j)'*v);
-            tmp = tmp * (face(i).normal(:,j)'*sun > 0);
+            tmp = c_total * face(i).area(j) * (face(i).normal(:,j)'*sun) * (face(i).normal(:,j)'*v);            
             L_j = L_j + tmp;
             face(i).m(1,j) = tmp;
         else
