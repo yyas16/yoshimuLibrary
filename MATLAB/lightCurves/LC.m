@@ -4,8 +4,8 @@ function [m, m_facet, face] = LC(jd, q, pos, obs_ECI, face, nu, earthVSOP)
 %    20190219  y.yoshimura
 %    Inputs: jd, Julian day, day, nx1 vector
 %            q, quaternion, -, nx4 matrix
-%            pos, satellite position vector@inertial frame, nx3 matrix
-%            obs, observer position vector@inertial frame, nx3 matrix
+%            pos, satellite position vector@inertial frame, km, nx3 matrix
+%            obs, observer position vector@inertial frame, km, nx3 matrix
 %            face, satellite shape,
 %            nu, flag if object is sunlit, nx1 vector
 %            nu == 1 sunlit
@@ -28,7 +28,7 @@ sun_pos = lonLat2pos(l, b, AU2km(dis));
 sun_relDir = sun_pos - pos; % km, relative sun direction@ECI
 
 %% observer position
-obs_relDir = obs_ECI - pos;  % relative observer direction@ECI
+obs_relDir = obs_ECI - pos;  % km, relative observer direction@ECI
 sunObs_rel = normRow(sun_pos - obs_ECI); % relative directional vector from observer to Sun
 satObs_rel = normRow(pos - obs_ECI); % relative directional vector from observer to sat
 

@@ -9,6 +9,10 @@ function q_inv = qInv(scalar, q)
 %    q_inv = qInv(scalar, q)
 %   (c) 2015 yasuhiro yoshimura
 %-------------------------------------------------------------------------------------
+if iscolumn(q) % transform to row vector
+q = q';
+end
+
 
 q_inv = (scalar == 0 ) .* [q(:,1) -q(:,2) -q(:,3) -q(:,4)] ...
     + (scalar == 4) .* [-q(:,1) -q(:,2) -q(:,3) q(:,4)];

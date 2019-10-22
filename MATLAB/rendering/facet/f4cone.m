@@ -1,5 +1,6 @@
+function face = f4cone(split, Ca)
 % ----------------------------------------------------------------------
-%
+%   % // ñ indexê∂ê¨ â~êçver.
 %    20180831  y.yoshimura
 %    Inputs:
 %   Outputs:
@@ -10,8 +11,6 @@
 %
 %   (c) 2018 yasuhiro yoshimura
 %----------------------------------------------------------------------
-% // ñ indexê∂ê¨ â~íåver.
-function face = f4cone(split, Ca)
 
 for i=1:split(1)
     for j=1:split(2)

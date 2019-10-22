@@ -16,7 +16,13 @@ function output = qMult(scalar, def, q, p)
 %   qMult(scalar, def, q, p)
 %   (c) 2015 yasuhiro yoshimura
 %-------------------------------------------------------------------------------------
+if iscolumn(q) % transform to row vector
+q = q';
+end
 
+if iscolumn(p)
+p = p';
+end
 
 % q \odot p = [ q0 * p0 - qv' * pv
 %               q0 .* pv + p0 .* qv + cross(qv,pv)]
