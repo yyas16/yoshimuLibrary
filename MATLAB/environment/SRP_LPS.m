@@ -4,7 +4,7 @@ function face = SRP_LPS(face, sun, d)
 %                    with Lambertian and Perfect Specular model
 %    20180816  y.yoshimura
 %    Inputs: face,
-%             sun, sun vector from sat to sun
+%             sun, sun vector from sat to sun, 3x1 unit vector
 %               d, distance between sat and sun, m
 %   Outputs: face‚Ì’†‚Éforce‚Ætorque‚ð‰Á‚¦‚é
 %   related function files:
@@ -21,8 +21,8 @@ Bf = 2/3;
 kappa = 0;
 
 d_AU = d / AU; % AU
-sun = sun ./ norm(sun);
 sun = sun(:); % column vector
+sun = sun ./ norm(sun);
 
 coeff = -S0 / c / d_AU^2;
 
@@ -35,12 +35,12 @@ for k = 1:size(face,1) % each component
             if face(k,i).normal(:,j)'*sun > 0 % when facet is sunlit
                 tmp = abs(sun'*face(k,i).normal(:,j)) * (face(k,i).Ca(j)+face(k,i).Cd(j)) .* sun ...
                     + (sun' * face(k,i).normal(:,j)) * (Bf*face(k,i).Cd(j)+kappa*face(k,i).Ca(j) ...
-                    + 2 * face(k,i).Cs(j)*abs(sun'*face(k,i).normal(:,j)) .* face(k,i).normal(:,j));
+                    + 2.0 * face(k,i).Cs(j)*abs(sun'*face(k,i).normal(:,j)) .* face(k,i).normal(:,j));
                 face(k,i).force(:,j) = coeff .* face(k,i).area(j) .* tmp;
             else
                 face(k,i).force(:,j) = zeros(3,1);
             end
-            face(k,i).torque(:,j) = cross(face(k,i).pos(:,j),face(k,i).force(:,j));
+            face(k,i).torque(:,j) = cross(face(k,i).pos(:,j), face(k,i).force(:,j));
         end
     end
 end
