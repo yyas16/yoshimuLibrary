@@ -28,8 +28,8 @@ coeff = -S0 / c / d_AU^2;
 
 for k = 1:size(face,1) % each component
     for i = 1:size(face,2) % each face
-        face(k,i).force = zeros(3, size(face(k,i).area,2));
-        face(k,i).torque = zeros(3, size(face(k,i).area,2));
+        face(k,i).force = zeros(3, size(face(k,i).area,2)); % 3 x N matrix
+        face(k,i).torque = zeros(3, size(face(k,i).area,2)); % 3 x N matrix
         
         for j = 1:size(face(k,i).area,2) % each small facet
             if face(k,i).normal(:,j)'*sun > 0 % when facet is sunlit

@@ -30,14 +30,14 @@ for k = 1:size(face,1) % each component
                 c_total = face(k,i).Cd(j)./pi ...
                     + 2.0 * face(k,i).Cs(j) * (u_bisec'*face(k,i).normal(:,j) >= cos(deg2rad(5)));
                 
-                tmp = c_total * face(k,i).area(j) * (face(k,i).normal(:,j)'*sun) * (face(k,i).normal(:,j)'*v);
-                L_j = L_j + tmp;
-                face(k,i).m(1,j) = tmp;
+                tmp = c_total * face(k,i).area(j) * (face(k,i).normal(:,j)'*sun) * (face(k,i).normal(:,j)'*v);                
+                face(k,i).m(1,j) = tmp; % f_obs
+                L_j = L_j + tmp; % summation of each face
             else
                 face(k,i).m(1,j) = 0;
             end
         end
-        L = L + L_j;        
+        L = L + L_j; % summation of whole object        
     end
 end
 
