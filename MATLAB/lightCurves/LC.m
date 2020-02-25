@@ -21,7 +21,6 @@ function [m, face] = LC(jd, q, pos, obs_ECI, face, nu, earthVSOP)
 %% a priori variable allocation w.r.t. time history
 L = zeros(length(jd), 1);
 
-
 %% Sun position
 [l, b, dis] = sun(jd, earthVSOP);
 sun_pos = lonLat2pos(l, b, AU2km(dis));
