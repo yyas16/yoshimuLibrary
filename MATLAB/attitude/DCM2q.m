@@ -6,10 +6,12 @@ function Q = DCM2q(scalar, R)
 %           scalar == 4,  q4:= cos(theta/2), q = [q1, q2, q3, q4]
 %          R, rotation matrix from inertial frame to body-fixed frame,
 %                                                          3x3 matrix
-%   outut:  Q(q0 q1 q2 q3) q0 := cos(Phi/2)
+%   Outputs:    Q(q0 q1 q2 q3), q0 := cos(phi/2), row vector
+%                       or
+%               Q(q1 q2 q3 q4), q4 := cos(phi/2), row vector
 %   cf. 1	Markley, F. L., ÅgUnit Quaternion from Rotation Matrix,Åh
 %           Journal of Guidance Control, and Dynamics, vol. 31, Mar. 2008, 
-%           pp. 440?442.
+%           pp. 440-442.
 %  (c) 2015 yasuhiro yoshimura
 %     function Q = DCM2q(scalar, R)
 % -------------------------------------------------------------------
@@ -20,7 +22,7 @@ temp = [R(1,1)
     R(3,3)
     trR];
 
-[val, iq] = max(temp);
+[~, iq] = max(temp);
 switch iq
     
     case 1
@@ -55,7 +57,7 @@ switch iq
 end
 
 
-Q = (scalar == 0 ) .* [q(4); q(1); q(2); q(3)]...
-    + (scalar == 4) .* q;
+Q = (scalar == 0 ) .* [q(4) q(1) q(2) q(3)]...
+    + (scalar == 4) .* q';
 
 end

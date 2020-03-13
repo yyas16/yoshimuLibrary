@@ -1,4 +1,4 @@
-function [jd, oe] = TLE2Oe(fp, satName)
+function [jd, oe] = TLE2oe(fp, satName)
 %   Orbital elements :
 %      a [km]   : semi-major axis
 %      e         : eccentricity

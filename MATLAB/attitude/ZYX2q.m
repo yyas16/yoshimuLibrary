@@ -9,7 +9,7 @@ function Q = ZYX2q(scalar, eulerAngles)
 %               Phi: around z axis
 %               Theta: around y axis
 %               Psi: around x axis
-%   Outputs:    Q(q0 q1 q2 q3) q0 := cos(phi/2) 
+%   Outputs:    Q(q0 q1 q2 q3) q0 := cos(phi/2)
 %                       or
 %               Q(q1 q2 q3 q4) q4 := cos(phi/2)
 %   related function files: DCM2q.m
@@ -21,14 +21,17 @@ function Q = ZYX2q(scalar, eulerAngles)
 %   (c) 2016 yasuhiro yoshimura
 %----------------------------------------------------------------------
 
-Phi   = eulerAngles(1);
-Theta = eulerAngles(2);
-Psi   = eulerAngles(3);
 
-R = [cos(Phi)*cos(Theta), sin(Phi)*cos(Theta), -sin(Theta)
-    -sin(Phi)*cos(Psi)+cos(Phi)*sin(Theta)*sin(Psi), cos(Psi)*cos(Phi)+sin(Psi)*sin(Theta)*sin(Phi), cos(Theta)*sin(Psi)
-    sin(Phi)*sin(Psi)+cos(Psi)*sin(Theta)*cos(Phi), -cos(Phi)*sin(Psi)+sin(Phi)*sin(Theta)*cos(Psi), cos(Theta)*cos(Psi)];
+    Phi   = eulerAngles(1);
+    Theta = eulerAngles(2);
+    Psi   = eulerAngles(3);
+    
+    R = [cos(Phi)*cos(Theta), sin(Phi)*cos(Theta), -sin(Theta)
+        -sin(Phi)*cos(Psi)+cos(Phi)*sin(Theta)*sin(Psi), cos(Psi)*cos(Phi)+sin(Psi)*sin(Theta)*sin(Phi), cos(Theta)*sin(Psi)
+        sin(Phi)*sin(Psi)+cos(Psi)*sin(Theta)*cos(Phi), -cos(Phi)*sin(Psi)+sin(Phi)*sin(Theta)*cos(Psi), cos(Theta)*cos(Psi)];
+    
+    Q = DCM2q(scalar, R);
 
-Q = DCM2q(scalar, R);
+
 
 end

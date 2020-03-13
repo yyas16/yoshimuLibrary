@@ -14,7 +14,7 @@ function rb = qRotation(scalar, r, qIn)
 % q \otimes p = [ q4 .* pv + p4 .* qv - cross(qv,pv)
 %                 q4 * p4 - qv' * pv]
 
-% transform r and qIn to row vectors( or nx3 matrix
+% transform r and qIn to row vectors or nx3 matrix
 if iscolumn(r)
     r = r';
 end
