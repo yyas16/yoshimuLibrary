@@ -2,11 +2,11 @@ function [X0, X] = ukf_sigma(lam, P, x)
 % ----------------------------------------------------------------------
 %   calculate sigma points of the state
 %    20181210  y.yoshimura
-%    Inputs: lam, tuning parameter for UKF
+%    Inputs: lam, tuning parameter of UKF
 %            P, covariance matrix, nxn matrix
-%            x, state vector, nx1 vector
-%   Outputs: X0, sigma points: n x 1 vector
-%            X, sigma points: n x 2*n matrix
+%            x, state vector, nx1 or 1xn vector
+%   Outputs: X0, sigma points: 1xn vector
+%            X, sigma points: 2*n x n matrix
 %   related function files:
 %   note:
 %   cf:
@@ -15,13 +15,17 @@ function [X0, X] = ukf_sigma(lam, P, x)
 %   (c) 2018 yasuhiro yoshimura
 %----------------------------------------------------------------------
 
+x = x(:); % column vector
 n = length(x);
 
-P_sq = chol(P)';
-sig_coeff = [sqrt(n+lam).*P_sq -sqrt(n+lam).*P_sq];
+P_sq = chol(P); % = sqrt(P)
+
+sig = [sqrt(n+lam).*P_sq -sqrt(n+lam).*P_sq]; % n x 2n matrix
 
 % X sigma points
-X0 = x;
-X = sig_coeff + kron(x, ones(1, 2*n));
+X0 = x';
+
+X = sig + kron(ones(1, 2*n), x);
+X = X';
 
 end

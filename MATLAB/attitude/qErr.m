@@ -8,6 +8,7 @@ function qe = qErr(scalar, q, qd)
 %           q, current (or true ) quaternion, Nx4 matrix
 %           qd, desired (or estimated ) quaternion, Nx4 matrix
 %   Output: qd^(-1) \odot  q Nx4 matrix
+%           = q \otimes qd^(-1)
 %   qErr(scalar, q, qd)
 %   (c) 2015 yasuhiro yoshimura
 %-------------------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-function R = ZXZ2DCM(phi, theta, psi)
+function R =  zxz2dcm(phi, theta, psi)
 % -------------------------------------------------------------------
 %   calculate directional cosine matrix
 %   for coordinate transformation around an axis (NOT vector rotation) 

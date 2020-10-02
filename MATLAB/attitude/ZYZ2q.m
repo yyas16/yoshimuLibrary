@@ -19,9 +19,9 @@ function Q = ZYZ2q(scalar, eulerAngles)
 %   Q = ZYZ2q(eulerAngles)
 %   (c) 2019 yasuhiro yoshimura
 %----------------------------------------------------------------------
+Q = zeros(size(eulerAngles,1), 4);
 
-Q = zeros(length(eulerAngles), 4);
-for i = 1:length(eulerAngles)
+for i = 1:size(eulerAngles,1)
     phi   = eulerAngles(i,1);
     theta = eulerAngles(i,2);
     psi   = eulerAngles(i,3);

@@ -1,12 +1,12 @@
-function [m, face] = LC(jd, q, pos, obs_ECI, face, nu, sun_pos)
+function [m, sat] = lc_obj(jd, q, pos, obs_ECI, sat, nu, sun_pos)
 % ----------------------------------------------------------------------
-%   calculate Light Curves for the object related to face
+%   calculate Light Curves for the object defined with sat
 %    20190219  y.yoshimura
 %    Inputs: jd, Julian day, day, nx1 vector
 %            q, quaternion, -, nx4 matrix
 %            pos, satellite position vector@inertial frame, km, nx3 matrix
 %            obs, observer position vector@inertial frame, km, nx3 matrix
-%            face, satellite shape,
+%            sat, satellite shape,
 %            nu, flag if object is sunlit, nx1 vector
 %            nu == 1 sunlit
 %            nu == 0 eclipse
@@ -32,7 +32,8 @@ obs_relDir = obs_ECI - pos;  % km, relative observer direction@ECI
 for i = 1:length(jd)
     sun_tmp = q2DCM(4, q(i,:))*normRow(sun_relDir(i,:))';
     obs_tmp = q2DCM(4, q(i,:))*normRow(obs_relDir(i,:))';
-    [f_obs(i,1), face] = LPS(face, sun_tmp, obs_tmp);   
+    sat = lps_obj(sat, sun_tmp, obs_tmp);
+    f_obs(i,1) = sum(sat.f_obs);
 %     [L(i,1), face] = AS(face, sun_tmp, obs_tmp);   
 %     [L(i,1), face] = CT(face, sun_tmp, obs_tmp);   
 end

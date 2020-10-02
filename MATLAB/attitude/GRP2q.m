@@ -5,7 +5,7 @@ function q = GRP2q(scalar, f, a, p)
 %    Inputs: scalar, specify the definition of the quaternion
 %            scalar == 0,  q0:= cos(theta/2), q = [q0, q1, q2, q3]
 %            scalar == 4,  q4:= cos(theta/2), q = [q1, q2, q3, q4]
-%            f, scaling parameter for Rodrigues parameters, scalara
+%            f, scaling parameter for Rodrigues parameters, scalar
 %            a, parameter for Rodrigues parameters, scalar
 %            p, generalized Rodrigues parameters, Nx3 matrix
 %   Outputs: q, quaternions, Nx4 matrix

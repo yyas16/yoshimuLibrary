@@ -6,7 +6,7 @@
 %       output: face.pos , face.area
 % -------------------------------------------------------------------
 
-function face = calcArea(vert, face)
+function face = calcArea4(vert, face)
 
 for i = 1:size(vert, 1)
     for j = 1:size(vert, 2) % the number of face
@@ -17,29 +17,29 @@ for i = 1:size(vert, 1)
         % vector from index 1 to index 3
         vB = vert(i,j).coord(face(i,j).make(:,3),:) - vert(i,j).coord(face(i,j).make(:,1),:);
         
-        crossA = cross(vA', vB', 1)'; % cross product between vA and vB
-        areaA  = sqrt(diag(crossA * crossA')) ./ 2; % norm ./ 2
-        
+        crossA = cross(vA, vB); % cross product between vA and vB, Nx3
+        areaA  = vecnorm(crossA,2,2) ./ 2; % (norm of cross product) ./ 2        
+                
         % repeat...
         % vector from index 1 to index 4
         vC = vert(i,j).coord(face(i,j).make(:,4),:) - vert(i,j).coord(face(i,j).make(:,1),:);
         % vector from index 1 to index 3
         vD = vert(i,j).coord(face(i,j).make(:,3),:) - vert(i,j).coord(face(i,j).make(:,1),:);
         
-        crossB = cross(vC', vD', 1)'; % cross product between vA and vB
-        areaB  = sqrt(diag(crossB * crossB')) ./ 2; % norm ./ 2
+        crossB = cross(vC, vD); % cross product between vA and vB
+        areaB  = vecnorm(crossB, 2, 2) ./ 2;
         
         Area = areaA + areaB;
         
-        face(i,j).area(1,:) = Area;
+        face(i,j).area(:,1) = Area;
         
         posSum = vert(i,j).coord(face(i,j).make(:,1),:) + ...
             vert(i,j).coord(face(i,j).make(:,2),:) + ...
             vert(i,j).coord(face(i,j).make(:,3),:) + ...
             vert(i,j).coord(face(i,j).make(:,4),:);
-        face(i,j).pos = (posSum ./ 4.0)';
+        face(i,j).pos = (posSum ./ 4.0);
         
     end
-    
 end
+
 end

@@ -20,10 +20,10 @@ face = struct;
 
 ca = ones(1,6); % surface optical properties
 length = [2;2;3]; % cube length
-split = [2;2;3]; % the number of split 
+split = [2;4;3]; % the number of split 
 
 vert = v4cube(vert, 1, length, split);
-face = f4cube(face, 1, split, ca);
+face = f4cube3(face, 1, split, ca);
 
 m = 1;
 kN = 6;
@@ -43,3 +43,5 @@ for k = 1:kN
     view(130,30);
     
 end
+
+face = calcNormal(vert, face);

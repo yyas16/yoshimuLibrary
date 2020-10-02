@@ -6,12 +6,12 @@ function km = AU2km(AU)
 %   Outputs:
 %   related function files:
 %   note:
-%   cf:
+%   cf: Satellite Orbits, Springer
 %   revisions;
 %   
 %   (c) 2019 yasuhiro yoshimura
 %----------------------------------------------------------------------
 
-km = AU .* 149597870.0;
+km = AU .* 149597870.691;
 
 end

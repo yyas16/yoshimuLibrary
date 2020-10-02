@@ -20,6 +20,7 @@ function p = q2GRP(scalar, f, a, q_in)
 
 q = (scalar == 0) .* [q_in(:,2:4), q_in(:,1)] ...
     + (scalar == 4) .* q_in;
-p = f ./ (a + abs(q(:,4))) .* sign(q(:,4)) .* q(:,1:3) ;
+% p = f .* sign(q(:,4)) .* q(:,1:3) ./ (a + abs(q(:,4))) ;
+p = f .* q(:,1:3) ./ (a + q(:,4));
 
 end

@@ -1,12 +1,13 @@
-function Pcov = ukf_cov(x_est, X0, X, w0c, wim)
+function Pcov = ukf_cov(x_est, X0, X, w0c, wic, Q)
 % ----------------------------------------------------------------------
 %   calculate the covariance using sigma points
 %    20181210  y.yoshimura
-%    Inputs: x_est, state vector: nx1 vector
-%            X0, sigma points: nx1 vector
-%            X, sigma points: nx2*n matrix
+%    Inputs: x_est, state vector: 1xn vector
+%            X0, sigma points: 1xn vector
+%            X, sigma points: 2n x n matrix
 %            w0c, weight for covariance
-%            wim
+%            wic weight for covariance
+%            Q, process noise matrix, n x n
 %   Outputs: Pcov, a priori covariance: n x n matrix
 %   related function files:
 %   note: x_est should be column vector
@@ -15,11 +16,17 @@ function Pcov = ukf_cov(x_est, X0, X, w0c, wim)
 %   function Pcov = ukf_cov(x_est, X0, X, w0c, wim)
 %   (c) 2018 yasuhiro yoshimura
 %----------------------------------------------------------------------
-
+x_est = x_est(:); % column vector
+X0 = X0(:);
 n = length(x_est);
-P0 = w0c .* ((X0 - x_est) * (X0 - x_est)');
-Pmat = X - kron(x_est, ones(1,2*n));
 
-Pcov = P0 + wim .* Pmat * Pmat';
+P0 = w0c .* ((X0 - x_est) * (X0 - x_est)');
+
+Pmat = zeros(n,n);
+for i = 1:n
+    Pmat = Pmat + wic .* (X(i,:)' - x_est) * (X(i,:)' - x_est)';
+end
+
+Pcov = P0 + Pmat * Pmat' + Q;
 
 end

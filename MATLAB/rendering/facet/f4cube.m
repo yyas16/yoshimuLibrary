@@ -1,10 +1,10 @@
 function face = f4cube(face, pNum, split, Ca)
 % ----------------------------------------------------------------------
-%   %// ñ indexê∂ê¨ íºï˚ëÃver.
+%   %// ñ indexê∂ê¨ íºï˚ëÃver. triangular patch ver.
 %    20190620  y.yoshimura
 %    Inputs: pNum: part number, scalar
-%            split:
-%            Ca
+%            split: split number, along [x, y, z] axis
+%            Ca: surface optical properties [Ca, Cd, Cs, Ct]
 %   Outputs:
 %   related function files:
 %   note:
@@ -79,8 +79,7 @@ for k=1:6
                     face(pNum,k).make(num,1) = j + (i - 1) * (split(3) + 1);
                     face(pNum,k).make(num,2) = j + i * (split(3) + 1);
                     face(pNum,k).make(num,3) = face(pNum,k).make(num,2) + 1;
-                    face(pNum,k).make(num,4) = face(pNum,k).make(num,1) + 1;
-                    
+                    face(pNum,k).make(num,4) = face(pNum,k).make(num,1) + 1;                    
                     
                     face(pNum,k).Ca(num) = Ca(1);
                     face(pNum,k).Cd(num) = Ca(2);

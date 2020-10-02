@@ -17,22 +17,22 @@ function [x_resamp,w_resamp,index] = resamplePF(x_particle, w_particle)
 %----------------------------------------------------------------------
 
 % Get Length of Particles
-n = length(x_particle);
+N = length(x_particle);
 
 % Cumulative Sum of Particles
 w_particle = w_particle(:);
 c = cumsum(w_particle);
 
 % Compute u Vector
-u = zeros(n,1);
-u(1) = rand(1) ./ n;
-u(2:n) = u(1) + (1:n-1)' ./ n;
+u = zeros(N,1);
+u(1) = rand(1) ./ N;
+u(2:N) = u(1) + (1:N-1)' ./ N;
 
 % Pre-allocate Index
-index = zeros(n,1);
+index = zeros(N,1);
 % Compute Index for Resampling 
 i = 1;
-for j = 1:n
+for j = 1:N
     while u(j)>c(i)
         i = i + 1;
     end
@@ -41,4 +41,4 @@ end
 
 % Resampled Data
 x_resamp = x_particle(index,:);
-w_resamp = ones(n,1)./n;
+w_resamp = ones(N,1)./N;
