@@ -1,5 +1,5 @@
 % ----------------------------------------------------------------------
-%   Check object shape and its normal vectors
+%   Check object shape and its normal vectors and other parameters(?)
 %    20201112  y.yoshimura
 %    Inputs:
 %   Outputs:
@@ -17,9 +17,9 @@ close all
 
 %% load object
 % いったん変数objに読み込む
-obj = read_wobj('flatCone.obj');
+obj = read_wobj('boxWing.obj');
 
-nCompo = 1; % the number of components, objectによって変更する
+nCompo = 3; % the number of components, objectによって変更する
 sat.vertices = obj.vertices; % all vertices, Nx3 matrix
 tmp = [];
 for i = 1:nCompo
