@@ -5,15 +5,16 @@
 %   Outputs:
 %   related function files:
 %   note:
-%   cf:
+%   cf: Satellite Orbits
 %   revisions;
 %   
 %   (c) 2019 yasuhiro yoshimura
 %----------------------------------------------------------------------
 
 %% Earth
-GE_day = 2.975536351779840e+15;   % GE, in km^3/day^2
-GE = GE_day / 86400 / 86400; % km^3/s^2
+GE = 398600.4415;  % km^3/s^2
+GE_day = GE *  86400 * 86400;  % GE, km^3/day^2
+GE_m = GE * 10^3 * 10^3 * 10^3; % m^3/s^2
 
 J2 = 0.00108263;
 RE = 6378.137; % Earth radius, km, WGS-84
