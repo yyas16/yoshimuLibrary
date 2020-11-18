@@ -17,7 +17,7 @@ close all
 
 %% load object
 % いったん変数objに読み込む
-obj = read_wobj('boxWing.obj');
+obj = read_wobj('boxWingR10.obj');
 
 nCompo = 3; % the number of components, objectによって変更する
 sat.vertices = obj.vertices; % all vertices, Nx3 matrix
@@ -46,3 +46,4 @@ quiver3(sat.pos(:,1), sat.pos(:,2), sat.pos(:,3), ...
     3*sat.normal(:,1), 3*sat.normal(:,2), 3*sat.normal(:,3),'r');
 axis equal
 grid on
+xlabel('x'), ylabel('y'), zlabel('z')
