@@ -57,8 +57,8 @@ elseif strcmp(BRDF, 'AS')
 else % Cook–Torrance model
     sat = lps_obj(sat, sun_b, obs_b);
 end
-f_obs = sum(sat.f_obs);
-
+f_obs = sum(sat.f_obs,1);
+f_obs = f_obs(:); % column vector as time history
 obs2Sun = normRow(sunPos - obs_ECI); % relative directional vector from obs to Sun
 obs2Sat = normRow(satPos - obs_ECI); % relative directional vector from obs to sat
 

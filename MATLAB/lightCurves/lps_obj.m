@@ -19,11 +19,12 @@ v = v ./ vecnorm(v, 2, 2);
 h = sun_b + v; % bisector vector of sun and observer vectors
 h = h ./ vecnorm(h, 2, 2);
 
+% sat.normal * h'は，faceの数 N x 時間履歴の数 Mのmatrixになる
 c_total = sat.Cd./pi ...
-    + 2.0 .* sat.Cs .* (dot(sat.normal,h,2) >= cos(deg2rad(5))); % Nx1
-tmp = c_total .* sat.area .* dot(sat.normal,sun_b,2) .* (dot(sat.normal,v,2)); 
+    + 2.0 .* sat.Cs .* ((sat.normal * h') >= cos(deg2rad(5))); 
+tmp = c_total .* sat.area .* (sat.normal * sun_b') .* (sat.normal * v'); 
 
 % if the faces can be seen or not
-sat.f_obs = tmp .* (dot(sat.normal,sun_b,2) > 0) .* (dot(sat.normal,v,2) > 0); % Nx1
+sat.f_obs = tmp .* (sat.normal * sun_b' > 0) .* (sat.normal * v' > 0); % NxM
 
 end
