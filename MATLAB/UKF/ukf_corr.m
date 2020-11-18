@@ -1,4 +1,4 @@
-function [Pyy, Pxy] = ukf_corr(x_est, X0, X, y_est, Y0, Y, w0c, wic)
+function [Pyy, Pxy] = ukf_corr(x_est, X0, X, y_est, Y0, Y, w0c, wic, R)
 % ----------------------------------------------------------------------
 %   calculate the correlated covariances
 %    20181210  y.yoshimura
@@ -10,6 +10,7 @@ function [Pyy, Pxy] = ukf_corr(x_est, X0, X, y_est, Y0, Y, w0c, wic)
 %            Y, measurement simga points: 2n x m vector
 %            w0c,
 %            wic
+%            R, measurement noise matrix
 %   Outputs: Pyy, measurement covarince: mxm matrix
 %            Pxy, correlated covariance: nxm matrix
 %   related function files:
@@ -34,7 +35,7 @@ Pyy = zeros(m,m);
 for i = 1:2*n
     Pyy = Pyy + wic .* (Y(i,:)' - y_est) * (Y(i,:)' - y_est)';
 end
-Pyy = Pyy0 + Pyy;
+Pyy = Pyy0 + Pyy + R;
 
 % cross correlation
 Pxy0 = w0c * (X0 - x_est) * (Y0 - y_est)';

@@ -34,7 +34,7 @@ switch nargin %入力引数の数で場合わけ
             BRDF = 'simple';
         end
     otherwise
-        BRDF = 'simple';
+        error('invalid number of arguments')
 end
 
 %% a priori variable allocation w.r.t. time history
