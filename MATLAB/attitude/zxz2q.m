@@ -1,4 +1,4 @@
-function q = zxz2q(scalar, eulerAngles)
+function q = zxz2q(scalar, euler)
 % ----------------------------------------------------------------------
 %    ZXZ Euler angles to quaternion
 %    20200904  y.yoshimura
@@ -16,14 +16,22 @@ function q = zxz2q(scalar, eulerAngles)
 %   note:
 %   cf:
 %   revisions;
-%   function q = zxz2q(4, eulerAngles)
+%   function q = zxz2q(4, euler)
 %   (c) 2020 yasuhiro yoshimura
 %----------------------------------------------------------------------
+phi = euler(:,1);
+theta = euler(:,2);
+psi = euler(:,3);
 
-q = zeros(length(eulerAngles), 4);
-for i = 1:length(eulerAngles)
-    dcm = zxz2dcm(eulerAngles(i,1), eulerAngles(i,2),eulerAngles(i,3));
-    q(i,:) = DCM2q(scalar, dcm);
-end
+n = size(euler,1);
+
+% q4: scalar partで計算
+q_phi = [zeros(n,2), sin(phi/2), cos(phi/2)];
+q_theta = [sin(theta/2), zeros(n,2), cos(theta/2)];
+q_psi = [zeros(n,2), sin(psi/2), cos(psi/2)];
+q = qMult(4,1, q_psi, qMult(4,1, q_theta, q_phi));
+
+q = (scalar == 0) .* [q(:,4), q(:,1:3)] ...
+    + (scalar == 4) .* q;
 
 end

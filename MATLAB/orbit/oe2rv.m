@@ -3,13 +3,13 @@ function [r, v] = oe2rv(oe)
 %   transform orbital elements to position and velocity vector
 %    Input: oe: orbital elements consist of
 %                    a: semimajor axis, km
-%                    ecc: eccentricity
-%                    incl: inclination, rad
-%                    omega: longitude of ascending node,rad
-%                    argp: argument of perigee/longitude of periapsis, rad
-%                    nu: true anomaly/true longitude/true latitude, rad
-%   Output: r: position vector, 1x3 vector, km
-%           v: velocity vector, 1x3 vector, km/s
+%                    e: eccentricity
+%                    inc: inclination, rad
+%                    raan: longitude of ascending node,rad
+%                    ome: argument of perigee/longitude of periapsis, rad
+%                    f: true anomaly/true longitude/true latitude, rad
+%   Output: r: position vector, Nx3 vector, km
+%           v: velocity vector, Nx3 vector, km/s
 % cf. Vallado, D. A., and McClain, W. D.,
 % Fundamentals of Astrodynamics and Applications,
 %  note: if true anomaly is unknown, use calcTA.m function to obtain true
@@ -22,50 +22,31 @@ orbit_const
 small = 1.0e-10;
 mu = GE; % ínêSèdóÕíËêî [km^3/s^2]
 
-a = oe(1);
-ecc = oe(2);
-incl = oe(3);
-ome = oe(4);
-argp = oe(5);
-nu = oe(6);
+a = oe(:,1);
+e = oe(:,2);
+inc = oe(:,3);
+raan = oe(:,4);
+ome = oe(:,5);
+f = oe(:,6);
 
-if ( ecc < small )
-    % ----------------  circular equatorial  ------------------
-    if ((incl < small) || ( abs(incl-pi)< small ))
-        argp = 0.0;
-        ome= 0.0;
-        %         nu   = truelon;
-    else
-        % --------------  circular inclined  ------------------
-        argp= 0.0;
-        %         nu  = arglat;
-    end
-else
-    % ---------------  elliptical equatorial  -----------------
-    if ( ( incl < small) || (abs(incl-pi)<small) )
-        %         argp = lonper;
-        ome = 0.0;
-    end
-end
+% if orbit is circular, ome = 0.0;
+ome = ome .* (e > small);
 
-p    = a * (1 - ecc^2);
-temp = p / (1.0  + ecc * cos(nu));
-r_pqw = [temp * cos(nu) % position in orbital plane
-    temp * sin(nu)
-    0.0];
+%  if orbit is equatorial, raan = 0.0;
+raan = raan .* (inc > small) .* (abs(inc - pi) > small);
 
-p = 0.0001 .* ( abs(p) < small) + p .* ( abs(p) >= small);
+p = a .* (1 - e.^2); % semi-latus rectum
+p = 0.0001 .* (abs(p) < small) + p .* ( abs(p) >= small);
 
-v_pqw = [-sin(nu) * sqrt(mu)  / sqrt(p)
-    (ecc + cos(nu)) * sqrt(mu) / sqrt(p)
-    0.0];
+temp = p ./ (1.0  + e .* cos(f));
+% position in orbital plane
+r_pqw = [temp .* cos(f), temp .* sin(f), zeros(length(f),1)];
+v_pqw = [-sin(f).*sqrt(mu)./sqrt(p), (e+cos(f)) .* sqrt(mu) ./ sqrt(p), zeros(length(f),1)];
 
-% ----------------  perform transformation to ijk  ------------
-
-r = zxz2dcm(ome,incl,argp)' * r_pqw;
-v = zxz2dcm(ome,incl,argp)' * v_pqw;
-
-r = r'; % row vector
-v = v';
+% transformation to IJK by quaternion
+q = zxz2q(4,[raan, inc, ome]); % quaternion from IJK to PQW
+q = qInv(4, q);% quaternion from PQW to IJK
+r = qRotation(4, r_pqw, q); % Nx3 matrix
+v = qRotation(4, v_pqw, q); % Nx3 matrix
 
 end

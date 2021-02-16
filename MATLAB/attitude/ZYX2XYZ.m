@@ -1,5 +1,6 @@
+function xyz = zyx2xyz(zyx)
 % ----------------------------------------------------------------------
-%   transform ZYX euler angles to ZXY euler angles
+%   transform ZYX euler angles to XYZ euler angles
 %    20200616  y.yoshimura
 %    Inputs:
 %   Outputs:
@@ -7,25 +8,16 @@
 %   note:
 %   cf:
 %   revisions;
-%   
+%
 %   (c) 2020 yasuhiro yoshimura
 %----------------------------------------------------------------------
 
-clc
-clear
-ZYX = load('test.csv');
-time = ZYX(:,1);
-zyx = deg2rad(ZYX(:,2:4));
 
-zyx = [zyx(:,3) zyx(:,2) zyx(:,1)];
+xyz = zeros(size(zyx,1),3);
 
-out = [];
-for i = 1:length(time)
+for i = 1:size(zyx,1)
     q = ZYX2q(0, zyx(i,:));
-
-    out(i,:) = q2XYZ(q);
-
+    xyz(i,:) = q2XYZ(q);
 end
 
-pos = [6800 .* ones(length(time),1), zeros(length(time),2)];
-csvwrite('XYZ.csv', [time, pos, out]);
+end

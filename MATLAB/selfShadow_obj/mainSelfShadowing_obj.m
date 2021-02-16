@@ -25,9 +25,10 @@ clc
 clear
 close all
 
+tic
 %% load object
 % いったん変数objに読み込む
-obj = read_wobj('oneweb_mid.obj');
+obj = read_wobj('boxWing.obj');
 
 nCompo = 3; % the number of components, objectによって変更する
 sat.vertices = obj.vertices; % all vertices, Nx3 matrix
@@ -42,7 +43,6 @@ sat = calcNormal_obj(sat); % face normal vectors
 sat.Ca = ones(length(sat.faces),1) .* obj.material(3).data(1); % objファイルの定義はcolorだが，とりあえず
 sat.Cd = ones(length(sat.faces),1) .* obj.material(4).data(1);
 sat.Cs = ones(length(sat.faces),1) .* obj.material(5).data(1);
-
 
 size(sat.vertices) % nVertices
 size(sat.faces) % nFaces
@@ -101,5 +101,5 @@ quiver3(0, 0, 0, 3*sun(1),3*sun(2),3*sun(3) ,'r') % show sun direction
 %     
 % end
 
-
+toc
 % movie(movFrame);

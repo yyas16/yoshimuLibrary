@@ -1,4 +1,4 @@
-function Q = DCM2q(scalar, R)
+function Q = dcm2q(scalar, R)
 %--------------------------------------------------------------------------
 %   calculate quaternions from directional cosine matrix
 %   input: scalar, specify the definition of the quaternion

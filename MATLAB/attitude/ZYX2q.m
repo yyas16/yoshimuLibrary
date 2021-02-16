@@ -1,37 +1,37 @@
-function Q = ZYX2q(scalar, eulerAngles)
+function q = zyx2q(scalar, euler)
 % ----------------------------------------------------------------------
-%   Transformation ZYX Euler angles to quaternion
-%    20120130  y.yoshimura
+%    ZYX Euler angles to quaternion
+%    20200904  y.yoshimura
 %    Inputs:scalar, specify the definition of the quaternion
 %             scalar == 0,  q0:= cos(theta/2), q = [q0, q1, q2, q3]
 %             scalar == 4,  q4:= cos(theta/2), q = [q1, q2, q3, q4]
-%                   eulerAngles := (Phi, Theta, Psi) [rad]
-%               Phi: around z axis
-%               Theta: around y axis
-%               Psi: around x axis
-%   Outputs:    Q(q0 q1 q2 q3) q0 := cos(phi/2)
+%              eulerAngles := (phi, theta, psi) [rad], nx3 matrix
+%               phi: around z axis, 1st rotation
+%               theta: around y axis, 2nd rotation
+%               psi: around x axis, 3rd rotation
+%   Outputs:    q(q0 q1 q2 q3) q0 := cos(phi/2), nx4 matrix
 %                       or
-%               Q(q1 q2 q3 q4) q4 := cos(phi/2)
-%   related function files: DCM2q.m
+%               q(q1 q2 q3 q4) q4 := cos(phi/2), nx4 matrix
+%   related function files:
 %   note:
 %   cf:
-%   revisions; 20160711 change the order of rotation angles, phi, theta,
-%   and psi.
-%   Q = ZYX2q(eulerAngles)
-%   (c) 2016 yasuhiro yoshimura
+%   revisions;
+%   function q = zyx2q(4, euler)
+%   (c) 2020 yasuhiro yoshimura
 %----------------------------------------------------------------------
+phi = euler(:,1);
+theta = euler(:,2);
+psi = euler(:,3);
 
+n = size(euler,1);
 
-    Phi   = eulerAngles(1);
-    Theta = eulerAngles(2);
-    Psi   = eulerAngles(3);
-    
-    R = [cos(Phi)*cos(Theta), sin(Phi)*cos(Theta), -sin(Theta)
-        -sin(Phi)*cos(Psi)+cos(Phi)*sin(Theta)*sin(Psi), cos(Psi)*cos(Phi)+sin(Psi)*sin(Theta)*sin(Phi), cos(Theta)*sin(Psi)
-        sin(Phi)*sin(Psi)+cos(Psi)*sin(Theta)*cos(Phi), -cos(Phi)*sin(Psi)+sin(Phi)*sin(Theta)*cos(Psi), cos(Theta)*cos(Psi)];
-    
-    Q = DCM2q(scalar, R);
+% q4: scalar partで計算
+q_phi = [zeros(n,2), sin(phi/2), cos(phi/2)];
+q_theta = [zeros(n,1), sin(theta/2), zeros(n,1), cos(theta/2)];
+q_psi = [sin(psi/2), zeros(n,2), cos(psi/2)];
+q = qMult(4,1, q_psi, qMult(4,1, q_theta, q_phi));
 
-
+q = (scalar == 0) .* [q(:,4), q(:,1:3)] ...
+    + (scalar == 4) .* q;
 
 end

@@ -5,13 +5,15 @@ function [X0, X] = ukf_sigma(lam, P, x, varargin)
 %    Inputs: lam, tuning parameter of UKF
 %            P, covariance matrix, nxn matrix
 %            x, state vector, nx1 or 1xn vector
+%            varargin, 'svd': singula value decomposition for P sqaure root
+%                      'chol': Cholesky decomposition for P square root
 %   Outputs: X0, sigma points: 1xn vector
 %            X, sigma points: 2*n x n matrix
 %   related function files:
 %   note:
 %   cf:
 %   revisions;
-%
+%   function [X0, X] = ukf_sigma(lam, P, x, varargin)
 %   (c) 2018 yasuhiro yoshimura
 %----------------------------------------------------------------------
 switch nargin %入力引数の数で場合わけ

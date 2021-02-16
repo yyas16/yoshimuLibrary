@@ -16,7 +16,7 @@ function tle = readTLE(TLEname)
 %         TLE‚ª•¡”•À‚ñ‚Å‚¢‚é‚Ì‚Í‰Â”\
 %   cf:
 %   revisions;
-%
+%   function tle = readTLE(TLEname)
 %   (c) 2019 yasuhiro yoshimura
 %----------------------------------------------------------------------
 

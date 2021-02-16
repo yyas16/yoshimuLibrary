@@ -1,4 +1,4 @@
-function [l, b, r] = sun(jd, earthVSOP)
+function [lon, lat, r] = Sun(jd, earthVSOP)
 % ----------------------------------------------------------------------
 %   Calculates Sun's geocentric longitude, latitude, and
 %   distance for a given Julian date. referred to the mean
@@ -6,9 +6,9 @@ function [l, b, r] = sun(jd, earthVSOP)
 %    20190214  y.yoshimura
 %    Inputs: (jd): Julian day number.
 %            earthVSOP: the coefficients of earth VSOP87
-%   Outputs:(l): Sun's geocentric longitude, in radians.
-%           (b): Sun's geocentric latitude, in radians.
-%           (r): Sun's geocentric distance, in AU.
+%   Outputs: lon: Sun's geocentric longitude, rad
+%            lat: Sun's geocentric latitude, rad
+%            r: Sun's geocentric distance, AU
 %   related function files:
 %   note:
 %   cf: AstroLib/VSOP87.c (confirmed)
@@ -20,13 +20,21 @@ function [l, b, r] = sun(jd, earthVSOP)
 %   function [l, b, r] = sun(jd, earthVSOP)
 %   (c) 2019 yasuhiro yoshimura
 %----------------------------------------------------------------------
+orbit_const
 
-[l, b, r] = earthVSOP87(jd, earthVSOP);
+% earth's heliocentric longitude, latitude, and distance
+[lon, lat, r] = earthVSOP87(jd, earthVSOP);
 
-l = l + pi;
-b = -1 .* b;
+lon = lon + pi;
+lat = -1 .* lat;
 
-l = mod(l, 2*pi); % value between 0 and 2*pi
-r = r;
+[~, ~, ~, eta, p_ini, p] = earthPrecession(J2000, jd);
+
+A = sin(eta) .* sin(lat) + cos(eta) .* cos(lat) .* sin(p + p_ini - lon);
+B = cos(lat) .* cos(p + p_ini - lon);
+C = cos(eta) .* sin(lat) - sin(eta) .* cos(lat) .* sin(p + p_ini - lon);
+
+lon = p_ini - atan2(A,B);
+lat = asin(C);
 
 end

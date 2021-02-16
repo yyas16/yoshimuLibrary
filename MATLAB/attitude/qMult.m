@@ -47,9 +47,9 @@ if (scalar == 0)
     p3 = p(4,:);
     pv = [p1; p2; p3];
     
-    output = (def == 0) .* [q0 .* p0 - diag(qv' * pv)'
+    output = (def == 0) .* [q0 .* p0 - dot(qv, pv, 1)
         q0 .* pv + p0 .* qv + cross(qv, pv)] ...
-        + (def == 1) .* [q0 .* p0 - diag(qv' * pv)'
+        + (def == 1) .* [q0 .* p0 - dot(qv, pv, 1)
         q0 .* pv + p0 .* qv - cross(qv, pv)];
     
     output = output';
@@ -65,22 +65,22 @@ if (scalar == 0)
     %         q3 q2 -q1 q0 ] * [p0; p1; p2; p3];
     
 else % (scalar == 4)
-    q4 = q(4,:);
     q1 = q(1,:);
     q2 = q(2,:);
     q3 = q(3,:);
+    q4 = q(4,:);
     qv = [q1; q2; q3];
     
-    p4 = p(4,:);
     p1 = p(1,:);
     p2 = p(2,:);
     p3 = p(3,:);
+    p4 = p(4,:);
     pv = [p1; p2; p3];
     
     output = (def == 0) .* [q4 .* pv + p4 .* qv + cross(qv,pv)
-        q4 .* p4 - diag(qv' * pv)'] ...
+        q4 .* p4 - dot(qv, pv, 1)] ...
         + (def == 1) .* [q4 .* pv + p4 .* qv - cross(qv,pv)
-        q4 .* p4 - diag(qv' * pv)'];
+        q4 .* p4 - dot(qv, pv, 1)];
     
     output = output';
     
