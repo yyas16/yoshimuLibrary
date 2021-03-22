@@ -26,8 +26,6 @@ ele_in = deg2rad(ele_in);
 lam = 100;
 [x, y, z, G, v] = sgHeatmap(azi_in, ele_in, lam);
 
-
-
 %% show figs
 figure
 [X, Y, Z] = sphere;
