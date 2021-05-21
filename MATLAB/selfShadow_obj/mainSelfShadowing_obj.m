@@ -28,7 +28,7 @@ close all
 tic
 %% load object
 % いったん変数objに読み込む
-obj = read_wobj('boxWing.obj');
+obj = read_wobj('oneweb.obj');
 
 nCompo = 3; % the number of components, objectによって変更する
 sat.vertices = obj.vertices; % all vertices, Nx3 matrix
@@ -38,8 +38,8 @@ for i = 1:nCompo
         obj.objects(4*i).data.vertices];
 end
 sat.faces = tmp; % face indices
-sat = calcArea_obj(sat);  % face areas
-sat = calcNormal_obj(sat); % face normal vectors
+[sat.area, sat.pos] = calcArea_obj(sat);  % face areas
+sat.normal= calcNormal_obj(sat); % face normal vectors
 sat.Ca = ones(length(sat.faces),1) .* obj.material(3).data(1); % objファイルの定義はcolorだが，とりあえず
 sat.Cd = ones(length(sat.faces),1) .* obj.material(4).data(1);
 sat.Cs = ones(length(sat.faces),1) .* obj.material(5).data(1);

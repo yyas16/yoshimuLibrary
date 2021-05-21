@@ -1,4 +1,4 @@
-function sat = calcNormal_obj(sat)
+function n = calcNormal_obj(sat)
 % ----------------------------------------------------------------------
 %   calculate (outward) normal vectors for .obj format
 %    20200903  y.yoshimura
@@ -30,7 +30,5 @@ crossV_norm = crossV_norm + (crossV_norm <= 1e-8) .*1e-8; % 0割を避けるた�
 
 % 	/* 外積v2×v1を長さ|v2×v1|で割って法線単位ベクトルnを求める *
 n = crossV ./ crossV_norm;
-
-sat.normal = n;
 
 end

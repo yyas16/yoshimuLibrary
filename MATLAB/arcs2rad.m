@@ -1,9 +1,9 @@
-function rad = arcsec2rad(sec)
+function rad = arcs2rad(angle)
 % ----------------------------------------------------------------------
-%   arcsecond to radians
-%    20210215  y.yoshimura
-%    Inputs: sec, arcsec
-%   Outputs: rad, radiians
+%   arcsecond to radian
+%    20210415  y.yoshimura
+%    Inputs: angle: angle to be transformed, arcs
+%   Outputs: rad: angle, rad
 %   related function files:
 %   note:
 %   cf:
@@ -12,7 +12,6 @@ function rad = arcsec2rad(sec)
 %   (c) 2021 yasuhiro yoshimura
 %----------------------------------------------------------------------
 
-rad = sec .* 1 ./ 3600 .* pi ./ 180;
-
+rad = angle .* pi ./ 3600 ./ 180.0;
 
 end

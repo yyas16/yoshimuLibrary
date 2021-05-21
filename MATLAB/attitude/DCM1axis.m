@@ -11,13 +11,12 @@ function DCM = DCM1axis(axis, phi)
 
 cp = cos(phi);
 sp = sin(phi);
-
-DCM = (axis == 1) .* [1.0 0.0 0.0
-    0.0 cp sp
-    0.0 -sp cp]...
-    + (axis == 2) .* [cp 0.0 -sp
-    0.0 1.0 0.0
-    sp 0.0 cp]...
-    + (axis == 3) .* [cp sp 0.0
-    -sp cp 0.0
-    0.0 0.0 1.0];
+DCM = (axis == 1) .* [1 0 0
+    0 cp sp
+    0 -sp cp]...
+    + (axis == 2) .* [cp 0 -sp
+    0 1 0
+    sp 0 cp]...
+    + (axis == 3) .* [cp sp 0
+    -sp cp 0
+    0 0 1];

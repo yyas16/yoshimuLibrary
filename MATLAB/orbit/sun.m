@@ -1,4 +1,4 @@
-function [lon, lat, r] = Sun(jd, earthVSOP)
+function [lon, lat, r] = sun(jd, earthVSOP)
 % ----------------------------------------------------------------------
 %   Calculates Sun's geocentric longitude, latitude, and
 %   distance for a given Julian date. referred to the mean
@@ -20,7 +20,7 @@ function [lon, lat, r] = Sun(jd, earthVSOP)
 %   function [l, b, r] = sun(jd, earthVSOP)
 %   (c) 2019 yasuhiro yoshimura
 %----------------------------------------------------------------------
-orbit_const
+global const
 
 % earth's heliocentric longitude, latitude, and distance
 [lon, lat, r] = earthVSOP87(jd, earthVSOP);
@@ -28,7 +28,7 @@ orbit_const
 lon = lon + pi;
 lat = -1 .* lat;
 
-[~, ~, ~, eta, p_ini, p] = earthPrecession(J2000, jd);
+[~, ~, ~, eta, p_ini, p] = precession(const.J2000, jd);
 
 A = sin(eta) .* sin(lat) + cos(eta) .* cos(lat) .* sin(p + p_ini - lon);
 B = cos(lat) .* cos(p + p_ini - lon);

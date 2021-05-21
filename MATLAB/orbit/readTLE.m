@@ -19,8 +19,7 @@ function tle = readTLE(TLEname)
 %   function tle = readTLE(TLEname)
 %   (c) 2019 yasuhiro yoshimura
 %----------------------------------------------------------------------
-
-orbit_const   %GE, in km^3/day^2
+global const % const.GE, in km^3/day^2
 
 %% scan TLE file
 data = importdata(TLEname, '');
@@ -47,7 +46,7 @@ jd = gc2jd(ep(:,1),ep(:,2),ep(:,3),ep(:,4),ep(:,5),ep(:,6));
 %% Information from LINE2
 rpd = str2double(line2(:,53:63));           % rounds per day
 
-oe = [(GE_day .* (1 ./ rpd ./ 2 ./pi).^2).^(1/3) ...  % semimajor axis
+oe = [(const.GE_day .* (1 ./ rpd ./ 2 ./pi).^2).^(1/3) ...  % semimajor axis
     str2double(strcat(ones(n/2,1).*'0.', line2(:,27:33)))...      % eccentricity
     str2double(line2(:,9:16)) ...            % [deg] inclination
     str2double(line2(:,18:25))...         % [deg] longitude (or right ascension) of the ascending node

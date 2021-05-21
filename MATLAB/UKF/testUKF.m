@@ -22,7 +22,8 @@ global a
 % Initialize
 dt = 1;
 tf = 60;
-t = [0:dt:tf]';
+t = 0:dt:tf;
+t = t(:);
 m = length(t); % stores samples every second
 
 % parameters

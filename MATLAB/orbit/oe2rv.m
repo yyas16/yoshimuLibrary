@@ -17,10 +17,10 @@ function [r, v] = oe2rv(oe)
 %  [r v] = oe2rv(oe);
 %   (c) 2015 yasuhiro yoshimura
 %----------------------------------------------------------------------
-orbit_const
+global const
 
 small = 1.0e-10;
-mu = GE; % 地心重力定数 [km^3/s^2]
+mu = const.GE; % 地心重力定数 [km^3/s^2]
 
 a = oe(:,1);
 e = oe(:,2);

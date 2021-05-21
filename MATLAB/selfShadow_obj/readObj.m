@@ -25,8 +25,8 @@ for i = 1:nCompo
         obj.objects(4*i).data.vertices];
 end
 satellite.faces = tmp; % face indices
-satellite = calcArea_obj(satellite);  % face areas
-satellite = calcNormal_obj(satellite); % face normal vectors
+[satellite.area, satellite.pos] = calcArea_obj(satellite);  % face areas
+satellite.normal = calcNormal_obj(satellite); % face normal vectors
 satellite.Ca = ones(length(satellite.faces),1) .* obj.material(3).data(1); % objファイルの定義はcolorだが，とりあえず
 satellite.Cd = ones(length(satellite.faces),1) .* obj.material(4).data(1);
 satellite.Cs = ones(length(satellite.faces),1) .* obj.material(5).data(1);

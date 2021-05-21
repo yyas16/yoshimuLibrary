@@ -1,29 +1,25 @@
-function DCM = earthFullRot_DCM(jd, UT1_UTC)
+function DCM = earthFullRot_DCM(jd0, jd1)
 % ----------------------------------------------------------------------
 %  calculate Earth rotation including precession and nutation
+%  from epoch j0 to j1
 %    20170516  y.yoshimura
-%    Inputs: jd: Julian days [day]
-%   Outputs: DCM from ECI to ECEF
+%    Inputs: jd0: Julian days [day]
+%            jd1: Julian days [day]
+%   Outputs: DCM from jd0 to jd1
 %   related function files:
 %   note:
 %   cf:1	
 %   revisions;
-%   DCM = earthFullRot(jd, UT1_UTC)
+%   DCM = earthFullRot(jd0, jd1)
 %   (c) 2017 yasuhiro yoshimura
 %----------------------------------------------------------------------
 
 % nutation
-[dcm_n,  eps_a, deps, dpsi] = earthNutation_DCM(jd);
+DCM_N = nutation_DCM(jd1);
 
 % precession 
-dcm_p = earthPrecession_DCM(jd);
+DCM_P = precession_DCM(jd0, jd1);
 
-% calculate GMST
-gmst = jd2GMST(jd, UT1_UTC);
-GAST = gmst + dpsi * cos(eps_a + deps);
-
-dcm_s = DCM1axis(3, GAST);
-
-DCM = dcm_s * dcm_n * dcm_p;
+DCM = DCM_N * DCM_P;
 
 end

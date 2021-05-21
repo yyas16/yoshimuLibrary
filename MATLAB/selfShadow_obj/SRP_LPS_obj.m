@@ -25,7 +25,6 @@ sun_b = sun_b(:); % column vector
 sun_b = sun_b ./ norm(sun_b);
 
 coeff = -S0 / c / d_AU^2;
-
 sunlit_flag = (sat.normal * sun_b > 0); % 1: sunlit, 0: shade
 
 tmp = (sat.normal*sun_b) .* (sat.Ca + sat.Cd) .* sun_b' ...
