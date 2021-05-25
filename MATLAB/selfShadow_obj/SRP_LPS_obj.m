@@ -16,7 +16,7 @@ function sat = SRP_LPS_obj(sat, sun_b, d)
 %----------------------------------------------------------------------
 S0 = 1357; % Solar constant, W/m^2
 c = 299792458; % light speed, m/s
-AU = AU2km(1.0) * 10^3; % m
+AU = au2km(1.0) * 10^3; % m
 Bf = 2/3;
 kappa = 0;
 

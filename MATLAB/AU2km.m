@@ -1,4 +1,4 @@
-function km = AU2km(AU)
+function km = au2km(AU)
 % ----------------------------------------------------------------------
 %    transform AU to km
 %    20190214  y.yoshimura
@@ -11,7 +11,8 @@ function km = AU2km(AU)
 %   
 %   (c) 2019 yasuhiro yoshimura
 %----------------------------------------------------------------------
+global const
 
-km = AU .* 149597870.691;
+km = AU .* const.AU_km;
 
 end

@@ -1,4 +1,4 @@
-function [lon, lat, r] = sun(jd, earthVSOP)
+function [lon, lat, r] = sun(jd)
 % ----------------------------------------------------------------------
 %   Calculates Sun's geocentric longitude, latitude, and
 %   distance for a given Julian date. referred to the mean
@@ -17,24 +17,24 @@ function [lon, lat, r] = sun(jd, earthVSOP)
 %                the Sun, add 180 (deg) to Earth's heliocentric longitude and
 %                change the sign of Earth's heliocentric latitude.
 %   revisions;
-%   function [l, b, r] = sun(jd, earthVSOP)
+%   function [lon, lat, r] = sun(jd)
 %   (c) 2019 yasuhiro yoshimura
 %----------------------------------------------------------------------
 global const
 
 % earth's heliocentric longitude, latitude, and distance
-[lon, lat, r] = earthVSOP87(jd, earthVSOP);
+[lon, lat, r] = earthVSOP87(jd);
 
 lon = lon + pi;
 lat = -1 .* lat;
 
-[~, ~, ~, eta, p_ini, p] = precession(const.J2000, jd);
+[~, ~, ~, eta, Pi_, p] = precession(const.J2000, jd);
 
-A = sin(eta) .* sin(lat) + cos(eta) .* cos(lat) .* sin(p + p_ini - lon);
-B = cos(lat) .* cos(p + p_ini - lon);
-C = cos(eta) .* sin(lat) - sin(eta) .* cos(lat) .* sin(p + p_ini - lon);
+A = sin(eta) .* sin(lat) + cos(eta) .* cos(lat) .* sin(p + Pi_ - lon);
+B = cos(lat) .* cos(p + Pi_ - lon);
+C = cos(eta) .* sin(lat) - sin(eta) .* cos(lat) .* sin(p + Pi_ - lon);
 
-lon = p_ini - atan2(A,B);
+lon = Pi_ - atan2(A,B);
 lat = asin(C);
 
 end

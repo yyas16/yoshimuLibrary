@@ -1,4 +1,4 @@
-function [lon, lat, r] = earthVSOP87(jd, earthVSOP)
+function [lon, lat, r] = earthVSOP87(jd)
 % ----------------------------------------------------------------------
 %    Calculate Earth heliocentric longitude, latitude, and distance
 %    20190214  y.yoshimura
@@ -6,7 +6,7 @@ function [lon, lat, r] = earthVSOP87(jd, earthVSOP)
 %   Outputs: lon: Earth's heliocentric longitude, rad, mx1
 %           vector
 %           lat: Earth's heliocentric latitude, rad, mx1
-%            r: Earth's heliocentric distance,  AU, mx1
+%           r: Earth's heliocentric distance,  AU, mx1
 %   related function files:
 %   note: Calculates Earth's heliocentric longitude, latitude, and
 %         distance for a given Julian day number, referred to the mean
@@ -14,10 +14,11 @@ function [lon, lat, r] = earthVSOP87(jd, earthVSOP)
 %   cf: AstroLib/VSOP87.c
 %       or Jean Meeus, "Astronomical Algorithms, 2nd edition", p. 217.
 %   revisions;
-%
+%   function [lon, lat, r] = earthVSOP87(jd, earthVSOP)
 %   (c) 2019 yasuhiro yoshimura
 %----------------------------------------------------------------------
 % VSOP_const  % load variable: earthVSOP
+global earthVSOP
 
 if iscolumn(jd)
     jd = jd';
