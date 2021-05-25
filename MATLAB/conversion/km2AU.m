@@ -11,7 +11,8 @@ function AU = km2AU(km)
 %   
 %   (c) 2019 yasuhiro yoshimura
 %----------------------------------------------------------------------
+global const
 
-AU = km ./ 149597870.691;
+AU = km ./ const.AU_km;
 
 end

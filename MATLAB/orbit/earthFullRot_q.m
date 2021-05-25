@@ -1,9 +1,8 @@
 function q = earthFullRot_q(jd0, jd1, scalar)
 % ----------------------------------------------------------------------
 %  calculate Earth rotation including precession and nutation
-%   q = earthFullRot_q(jd, UT1_UTC)
 %    20170516  y.yoshimura
-%    Inputs: jd0: Julian days [day], nx1 vector
+%    Inputs: jd0: Julian days [day], scalar
 %            jd1: Julian days [day], nx1 vector   
 %            scalar: quaternion definition
 %                 scalar == 0,  q0:= cos(theta/2), q = [q0, q1, q2, q3]
@@ -23,6 +22,7 @@ q_n = nutation_q(jd1, scalar);
 % precession 
 q_p = precession_q(jd0, jd1, scalar);
 
+% TOD = Nutation * Precession * J2000
 q = qMult(scalar, 1, q_n, q_p);
 
 

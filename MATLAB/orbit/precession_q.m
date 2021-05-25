@@ -21,7 +21,7 @@ function q = precession_q(jd0, jd1, scalar)
 % forth part of quaternion is assumed to be scalar part in calculation
 % i.e., q = [e.*sin(theta/2); cos(theta/2)]
 
-[zeta, z, theta, ~, ~, ~] = earthPrecession(jd0, jd1);
+[zeta, z, theta, ~, ~, ~] = precession(jd0, jd1);
 
 the_q = -pi / 2 - z;
 N = length(the_q);
